@@ -1,0 +1,112 @@
+<view class="gpage" wx:if="{{game}}">
+  <!-- 顶部玩家条 -->
+  <view class="players-bar">
+    <view wx:for="{{playersView}}" wx:key="seat"
+      class="p-card {{item.current ? 'current' : ''}}" style="--pc:{{item.color}}">
+      <player-avatar url="{{item.avatar}}" name="{{item.name}}" color="{{item.color}}" size="64" />
+      <view class="p-meta">
+        <view class="p-name">
+          <text class="p-nick">{{item.name}}</text>
+          <view wx:if="{{item.canTakeover}}" class="tool takeover" aria-label="接管该AI座位"
+            catchtap="onTakeover" data-seat="{{item.seat}}">接管</view>
+                    <text wx:if="{{item.isOwner}}" class="p-tag owner">👑房主</text>
+          <text wx:elif="{{item.offline}}" class="p-tag warn">断线</text>
+          <text wx:elif="{{item.hosted || (item.seat === mySeat && hostedOn)}}" class="p-tag warn">托管</text>
+          <text wx:elif="{{item.type === 'ai'}}" class="p-tag">AI</text>
+        </view>
+        <view class="p-done">
+          {{item.done}}/4 到达<text wx:if="{{item.held}}" class="p-held"> · {{item.held}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 表情气泡 -->
+  <view class="emote-bubble" wx:if="{{bubble}}">{{bubble.from}} {{bubble.type}}</view>
+
+  <!-- 棋盘 -->
+  <view class="board-wrap">
+    <chess-board id="board" size="{{boardSize}}" state="{{game}}"
+      my-seat="{{mySeat}}" interactive="{{canSelect}}"
+      movable-planes="{{game.movablePlanes}}"
+      show-fly="{{game.allowFly === false ? false : true}}"
+      bind:planetap="onPlaneTap" />
+  </view>
+
+  <!-- 表情栏 -->
+  <view class="emote-bar {{emoteCd ? 'cd' : ''}}">
+    <view class="emote" aria-label="发送表情{{item}}" wx:for="{{emoteTypes}}" wx:key="*this" data-type="{{item}}" bindtap="onEmote">{{item}}</view>
+    <view class="emote-cd" wx:if="{{emoteCd}}">{{emoteCdSec}}s</view>
+  </view>
+
+  <!-- 骰子历史 -->
+  <view class="dice-hist" wx:if="{{diceHistory.length > 1}}">
+    <text class="dh-label">最近</text>
+    <view class="dh-item {{index === diceHistory.length - 1 ? 'latest' : ''}}"
+      wx:for="{{diceHistory}}" wx:key="index">{{item}}</view>
+  </view>
+
+  <!-- 底部控制台 -->
+  <view class="ctrl">
+    <view class="ctrl-top">
+      <view class="hint">{{hintText}}</view>
+      <view class="ctrl-actions">
+        <view class="tool" wx:if="{{roomNo}}" bindtap="onCopyRoomNo">🔢{{roomNo}}</view>
+        <view class="tool" wx:if="{{spectatorCount}}">👁{{spectatorCount}}</view>
+        <view class="tool" wx:if="{{heldItems}}">{{heldItems}}</view>
+        <view class="tool {{hostedOn ? 'on' : ''}}" aria-label="切换AI托管" wx:if="{{mySeat >= 0 && game.status === 'playing'}}"
+          bindtap="onToggleHosted">🤖托管</view>
+        <view class="tool" aria-label="查看战况统计" bindtap="onShowStats">📊</view>
+        <view class="tool" aria-label="查看玩法规则" bindtap="onShowRules">❓</view>
+        <view class="tool" aria-label="切换音效开关" bindtap="onToggleMute">{{muted ? '🔇' : '🔊'}}</view>
+      </view>
+    </view>
+    <view class="ctrl-main">
+      <view class="ctrl-side">
+        <view class="dice-label">点数</view>
+        <dice id="dice" value="{{diceVal}}" />
+      </view>
+      <view class="roll-wrap">
+        <button class="btn btn-primary roll-btn" bindtap="onRoll" disabled="{{!canRoll}}">
+          {{canRoll ? (game.extraRollLeft ? '奖励掷骰' : '掷骰子') : '等待中'}}
+        </button>
+        <button wx:if="{{canReroll}}" class="btn btn-ghost reroll-btn" bindtap="onReroll">🔄 重掷（{{game.dice}} 点不满意）</button>
+        <view class="exit" aria-label="离开对局" bindtap="onExit">离开对局</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 战况统计弹层 -->
+  <view class="mask stats-mask" wx:if="{{showStats}}" bindtap="onCloseStats">
+    <view class="popup" catchtap="noop">
+      <view class="h2 stats-popup-title">战况统计</view>
+      <view class="s-head">
+        <text class="s-c">玩家</text><text class="s-n">掷骰</text><text class="s-n">掷6</text>
+        <text class="s-n">击落</text><text class="s-n">被击</text><text class="s-n">进度</text>
+      </view>
+      <view class="s-row" wx:for="{{playersView}}" wx:key="seat">
+        <view class="s-c s-p"><view class="dot2" style="background:{{item.color}}"></view>{{item.name}}</view>
+        <text class="s-n">{{item.rolls}}</text>
+        <text class="s-n">{{item.sixes}}</text>
+        <text class="s-n">{{item.kills}}</text>
+        <text class="s-n">{{item.beenKilled}}</text>
+        <text class="s-n">{{item.progress}}</text>
+      </view>
+      <view class="sub stats-tip" wx:if="{{spectatorNames.length}}">观战中：{{spectatorNames}}</view>
+      <view class="sub stats-tip">进度 = 各飞机相对步数之和（终点 57）</view>
+    </view>
+  </view>
+
+  <!-- 规则速览弹层 -->
+  <view class="mask stats-mask" wx:if="{{showRules}}" bindtap="onCloseRules">
+    <view class="popup" catchtap="noop">
+      <view class="h2 stats-popup-title">玩法速览</view>
+      <view class="rule-item" wx:for="{{rules}}" wx:key="index">{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 胜利横幅 -->
+  <view class="win-mask" wx:if="{{winBanner}}">
+    <view class="win-banner">🏆 {{winBanner}}</view>
+  </view>
+</view>

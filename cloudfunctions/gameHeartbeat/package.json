@@ -1,0 +1,8 @@
+{
+  "name": "gameHeartbeat",
+  "description": "在线心跳 + 掉线检测 + AI托管切换 + 房主转移",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

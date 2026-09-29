@@ -1,0 +1,9 @@
+{
+  "name": "aiTick",
+  "version": "1.0.0",
+  "description": "定时器：全离线时自动推进 AI/托管对局（config.json 含触发器，部署后生效）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

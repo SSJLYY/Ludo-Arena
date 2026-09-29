@@ -1,0 +1,8 @@
+{
+  "name": "roomSeat",
+  "description": "座位操作：入座/起身/加AI/移除AI/改难度/踢人",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

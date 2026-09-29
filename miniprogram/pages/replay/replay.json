@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "对局回放",
+  "usingComponents": {
+    "chess-board": "/components/chess-board/chess-board",
+    "dice": "/components/dice/dice",
+    "player-avatar": "/components/player-avatar/player-avatar"
+  }
+}

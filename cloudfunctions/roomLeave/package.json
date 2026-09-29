@@ -1,0 +1,8 @@
+{
+  "name": "roomLeave",
+  "description": "离开房间（对局中转为 AI 托管）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

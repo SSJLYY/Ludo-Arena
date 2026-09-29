@@ -1,0 +1,162 @@
+.room-head {
+  margin-bottom: 28rpx;
+}
+
+.room-no {
+  font-size: 64rpx;
+  font-weight: 800;
+  letter-spacing: 10rpx;
+  margin-top: 6rpx;
+}
+
+.copy {
+  font-size: 20rpx;
+  color: var(--brand);
+  letter-spacing: 0;
+  font-weight: 400;
+  margin-left: 8rpx;
+}
+
+.room-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  align-items: flex-end;
+}
+
+.badge {
+  font-size: 22rpx;
+  color: var(--ink-2);
+  background: #f7f5ee;
+  border-radius: 999rpx;
+  padding: 8rpx 20rpx;
+}
+
+.invite-btn {
+  margin-top: 28rpx;
+}
+
+.invite-row {
+  display: flex;
+  gap: 18rpx;
+  margin-top: 28rpx;
+}
+
+.invite-row .invite-btn {
+  flex: 1;
+  margin-top: 0;
+}
+
+.poster-btn {
+  flex: 1;
+}
+
+.poster-mask {
+  align-items: center;
+  justify-content: center;
+}
+
+.poster-body {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poster-img {
+  width: 100%;
+  border-radius: 20rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.4);
+}
+
+.poster-ops {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 28rpx;
+  width: 100%;
+}
+
+.save-btn {
+  flex: 1;
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 28rpx;
+}
+
+/* 离屏海报画布 */
+.invite-canvas {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 600px;
+  height: 900px;
+}
+
+.spectator-tip {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: var(--brand);
+  background: rgba(232, 84, 63, 0.08);
+  border-radius: 14rpx;
+  padding: 14rpx 20rpx;
+}
+
+.spec-list {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+}
+
+.spec-item {
+  margin-right: -10rpx;
+}
+
+.spec-label {
+  margin-left: 24rpx;
+  font-size: 22rpx;
+  color: var(--ink-2);
+}
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22rpx;
+}
+
+.rule-tip {
+  margin-top: 32rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 28rpx 32rpx;
+}
+
+.rule-tip .h2 {
+  margin-bottom: 16rpx;
+}
+
+.rule-line {
+  font-size: 24rpx;
+  color: var(--ink-2);
+  line-height: 1.9;
+}
+
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx 32rpx calc(20rpx + env(safe-area-inset-bottom));
+  background: rgba(246, 243, 234, 0.94);
+  backdrop-filter: blur(8px);
+}
+
+.leave-btn {
+  width: 200rpx;
+  flex-shrink: 0;
+}
+
+.start-wrap {
+  flex: 1;
+}

@@ -1,0 +1,157 @@
+/* ===== 全局设计变量 ===== */
+page {
+  --c-red: #e5484d;
+  --c-yellow: #f0a12a;
+  --c-blue: #3f7bf5;
+  --c-green: #27ae60;
+  --ink: #23243a;
+  --ink-2: #6b6d85;
+  --ink-3: #9b9db3;
+  --bg: #f6f3ea;
+  --card: #ffffff;
+  --line: #ece8dc;
+  --brand: #e8543f;
+  --brand-deep: #d43d2a;
+  --gold: #ffb03a;
+
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: 28rpx;
+}
+
+/* ===== 通用布局 ===== */
+.page {
+  min-height: 100vh;
+  padding: 24rpx 32rpx 60rpx;
+  box-sizing: border-box;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 28rpx;
+  padding: 32rpx;
+  box-shadow: 0 6rpx 24rpx rgba(35, 36, 58, 0.06);
+}
+
+.h1 {
+  font-size: 48rpx;
+  font-weight: 700;
+  letter-spacing: 2rpx;
+}
+
+.h2 {
+  font-size: 34rpx;
+  font-weight: 600;
+}
+
+.sub {
+  color: var(--ink-2);
+  font-size: 24rpx;
+}
+
+/* ===== 按钮 ===== */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 0;
+  line-height: 96rpx;
+  height: 96rpx;
+  border: none;
+}
+
+.btn::after {
+  border: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff8a3d 0%, var(--brand) 100%);
+  color: #fff;
+  box-shadow: 0 10rpx 24rpx rgba(232, 84, 63, 0.32);
+}
+
+.btn-primary[disabled] {
+  background: #e7e3d8;
+  color: #b3b0a6;
+  box-shadow: none;
+}
+
+.btn-ghost {
+  background: #fff;
+  color: var(--ink);
+  border: 2rpx solid var(--line);
+}
+
+.btn-plain {
+  background: transparent;
+  color: var(--ink-2);
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 26rpx;
+}
+
+/* ===== 输入框 ===== */
+.input {
+  background: #f7f5ee;
+  border-radius: 18rpx;
+  height: 92rpx;
+  padding: 0 28rpx;
+  font-size: 30rpx;
+}
+
+/* ===== 座位色点 ===== */
+.dot {
+  width: 22rpx;
+  height: 22rpx;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-red { background: var(--c-red); }
+.dot-yellow { background: var(--c-yellow); }
+.dot-blue { background: var(--c-blue); }
+.dot-green { background: var(--c-green); }
+
+/* ===== 通用弹层 ===== */
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(20, 21, 35, 0.55);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+}
+
+.popup {
+  width: 100%;
+  background: #fff;
+  border-radius: 36rpx 36rpx 0 0;
+  padding: 40rpx 36rpx calc(40rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+/* ===== 行 ===== */
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.spread {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.divider {
+  height: 2rpx;
+  background: var(--line);
+  margin: 24rpx 0;
+}

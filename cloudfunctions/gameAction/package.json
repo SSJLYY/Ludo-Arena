@@ -1,0 +1,8 @@
+{
+  "name": "gameAction",
+  "description": "对局行动：掷骰/选机/AI步进（引擎权威结算 + seq 乐观锁）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

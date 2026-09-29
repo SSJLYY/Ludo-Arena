@@ -1,0 +1,8 @@
+{
+  "name": "roomEmote",
+  "description": "对局/房间表情互动（写入 rooms.emotes，不影响对局状态机）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

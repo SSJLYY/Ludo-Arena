@@ -1,0 +1,220 @@
+.rpage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16rpx 24rpx calc(20rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.players-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12rpx;
+}
+
+.p-card {
+  background: #fff;
+  border-radius: 18rpx;
+  padding: 12rpx 8rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3rpx solid transparent;
+  opacity: 0.72;
+}
+
+.p-card.current {
+  border-color: var(--pc);
+  opacity: 1;
+}
+
+.p-meta {
+  margin-top: 6rpx;
+  text-align: center;
+}
+
+.p-nick {
+  font-size: 20rpx;
+  font-weight: 600;
+  max-width: 110rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.p-done {
+  font-size: 18rpx;
+  color: var(--ink-2);
+  margin-top: 4rpx;
+}
+
+.end-tip {
+  margin-top: 14rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: var(--brand);
+  font-weight: 600;
+}
+
+.board-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 14rpx;
+}
+
+.ctrl {
+  margin-top: 22rpx;
+  background: #fff;
+  border-radius: 26rpx;
+  padding: 20rpx 28rpx;
+  box-shadow: 0 6rpx 24rpx rgba(35, 36, 58, 0.07);
+}
+
+.slider {
+  margin: 10rpx 0;
+}
+
+/* 骰子历史条（与对局页一致） */
+.dice-hist {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  margin-top: 10rpx;
+}
+
+.dh-label {
+  font-size: 20rpx;
+  color: var(--ink-3);
+}
+
+.dh-item {
+  width: 38rpx;
+  height: 38rpx;
+  border-radius: 50%;
+  background: #f7f5ee;
+  color: var(--ink-2);
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dh-item.latest {
+  background: var(--brand);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ctrl-row {
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+}
+
+.cbtn {
+  font-size: 34rpx;
+  padding: 6rpx 10rpx;
+}
+
+.cbtn.play {
+  font-size: 44rpx;
+}
+
+.cbtn.speed {
+  font-size: 26rpx;
+  color: var(--brand);
+  background: rgba(232, 84, 63, 0.08);
+  border-radius: 999rpx;
+  padding: 6rpx 20rpx;
+}
+
+.pos {
+  margin-left: auto;
+  color: var(--ink-3);
+  font-size: 24rpx;
+}
+
+.dice-line {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  margin-top: 16rpx;
+}
+
+.dice-label {
+  font-size: 22rpx;
+  color: var(--ink-3);
+}
+
+.actor-name {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.back {
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 22rpx;
+  margin-top: 14rpx;
+  text-decoration: underline;
+}
+
+/* 关键时刻书签 */
+.hl-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 18rpx 24rpx;
+  margin-top: 14rpx;
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.hl-arrow {
+  color: var(--ink-3);
+  font-size: 24rpx;
+}
+
+.hl-list {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 8rpx 24rpx;
+  margin-top: 10rpx;
+}
+
+.hl-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 14rpx 0;
+  border-bottom: 2rpx solid var(--line);
+}
+
+.hl-item:last-child {
+  border-bottom: none;
+}
+
+.hl-icon {
+  font-size: 28rpx;
+  flex-shrink: 0;
+}
+
+.hl-text {
+  flex: 1;
+  min-width: 0;
+  font-size: 24rpx;
+  color: var(--ink-2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hl-frame {
+  font-size: 20rpx;
+  color: var(--ink-3);
+  flex-shrink: 0;
+}

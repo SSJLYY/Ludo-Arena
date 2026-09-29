@@ -1,0 +1,22 @@
+# 依赖（一律 npm install 重建，不进版本库）
+node_modules/
+
+# 运行时数据（玩家档案/账号凭证/审计日志/回放/备份，只存在于服务器数据卷与本机）
+server/data/
+server/data-test/
+backups-local/
+
+# 本地密钥与环境（ADMIN_TOKEN 等，不入库）
+.env.local
+
+# AI 工作笔记（会话记忆，含运维信息）
+.workbuddy/
+
+# 微信开发者工具私有配置
+project.private.config.json
+
+# 系统与临时文件
+*.log
+*.tmp
+.DS_Store
+Thumbs.db

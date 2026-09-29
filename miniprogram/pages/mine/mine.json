@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的",
+  "usingComponents": {
+    "player-avatar": "/components/player-avatar/player-avatar"
+  }
+}

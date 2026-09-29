@@ -1,0 +1,58 @@
+<view class="slot" style="border-color: {{seat.type === 'empty' ? '#ece8dc' : colorHex}};">
+  <!-- 空位 -->
+  <block wx:if="{{seat.type === 'empty'}}">
+    <view class="empty-body">
+      <view class="plus" style="color:{{colorHex}}">+</view>
+      <view class="empty-actions">
+        <button class="mini-btn" size="mini" open-type="share">邀请好友</button>
+        <button wx:if="{{isOwner}}" class="mini-btn alt" size="mini" bindtap="onAddAI">加个电脑</button>
+        <button wx:elif="{{!isOwner}}" class="mini-btn alt" size="mini" bindtap="onSit">坐下</button>
+      </view>
+    </view>
+  </block>
+
+  <!-- 真人 -->
+  <block wx:elif="{{seat.type === 'human'}}">
+    <view class="body">
+      <view class="avatar-wrap">
+        <image wx:if="{{seat.avatarUrl}}" class="avatar" src="{{seat.avatarUrl}}" mode="aspectFill" />
+        <view wx:else class="avatar avatar-fallback" style="background:{{colorHex}}">{{seat.nickName[0] || '玩'}}</view>
+        <view class="online {{seat.isOnline ? 'on' : 'off'}}"></view>
+      </view>
+      <view class="info">
+        <view class="name">
+          <text class="ellipsis">{{seat.nickName}}</text>
+          <text wx:if="{{isMe}}" class="me-tag">我</text>
+        </view>
+        <view class="status" wx:if="{{!seat.isOnline}}">断线 · AI 托管中</view>
+        <view class="status ok" wx:else>在线</view>
+      </view>
+    </view>
+    <view class="ops" wx:if="{{canManage}}">
+      <view class="op danger" bindtap="onRemove">移除</view>
+    </view>
+    <view class="corner" style="background:{{colorHex}}"></view>
+  </block>
+
+  <!-- AI -->
+  <block wx:elif="{{seat.type === 'ai'}}">
+    <view class="body">
+      <view class="avatar-wrap">
+        <view class="avatar avatar-robot" style="background:{{colorHex}}">🤖</view>
+      </view>
+      <view class="info">
+        <view class="name">
+          <text class="ellipsis">{{seat.nickName}}</text>
+        </view>
+        <view class="stars">{{seat.aiLevel === 1 ? '★☆☆☆ 简单' : seat.aiLevel === 3 ? '★★★☆ 困难' : seat.aiLevel === 4 ? '★★★★ 大师' : '★★☆☆ 普通'}}</view>
+      </view>
+    </view>
+    <view class="ops" wx:if="{{isOwner}}">
+      <picker range="{{['简单', '普通', '困难', '大师']}}" value="{{seat.aiLevel - 1}}" bindchange="onLevel">
+        <view class="op">难度</view>
+      </picker>
+      <view class="op danger" bindtap="onRemove">移除</view>
+    </view>
+    <view class="corner" style="background:{{colorHex}}"></view>
+  </block>
+</view>

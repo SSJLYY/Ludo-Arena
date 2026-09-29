@@ -1,0 +1,67 @@
+<view class="page">
+  <!-- 资料卡 -->
+  <view class="card profile-card">
+    <button class="avatar-btn" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+      <player-avatar url="{{profile.avatarUrl}}" name="{{profile.nickName}}" color="#e8543f" size="128" />
+      <view class="avatar-edit">换头像</view>
+    </button>
+    <view class="nick-wrap">
+      <view class="sub">昵称</view>
+      <input class="nick-input" type="nickname" maxlength="20" placeholder="点击填写昵称"
+        value="{{profile.nickName}}" bindinput="onNickInput" bindblur="onNickBlur" />
+    </view>
+  </view>
+
+  <!-- 战绩 -->
+  <view class="card" wx:if="{{stats}}">
+    <view class="spread">
+      <view class="h2 stats-title">战绩统计</view>
+      <view class="tier-tag">🎖 {{tierName}} · {{tierNext}}</view>
+    </view>
+    <view class="stat-strip">
+      <view class="stat"><view class="stat-num">{{stats.games}}</view><view class="sub">总局数</view></view>
+      <view class="stat"><view class="stat-num">{{stats.wins}}</view><view class="sub">胜场</view></view>
+      <view class="stat"><view class="stat-num">{{stats.kills}}</view><view class="sub">击落</view></view>
+      <view class="stat"><view class="stat-num">{{bestKills}}</view><view class="sub">单局最高</view></view>
+      <view class="stat"><view class="stat-num">{{winRate}}%</view><view class="sub">胜率</view></view>
+      <view class="stat"><view class="stat-num">{{winStreak ? '🔥' + winStreak : '—'}}</view><view class="sub">连胜</view></view>
+    </view>
+  </view>
+
+  <!-- 成就墙 -->
+  <view class="card">
+    <view class="h2 stats-title">成就墙（{{wallCount}}/{{achievementWall.length}}）</view>
+    <view class="ach-grid">
+      <view class="ach {{item.unlocked ? 'on' : ''}}" wx:for="{{achievementWall}}" wx:key="id">
+        <view class="ach-icon">{{item.icon}}</view>
+        <view class="ach-name">{{item.name}}</view>
+        <view class="ach-desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近对局 -->
+  <view class="card" wx:if="{{recentGames.length}}">
+    <view class="h2 stats-title">最近对局</view>
+    <view class="recent-row" wx:for="{{recentGames}}" wx:key="ts" bindtap="onOpenReplay" data-index="{{index}}">
+      <view class="recent-medal">{{item.winner ? '🥇' : '第' + item.rank + '名'}}</view>
+      <view class="recent-meta">
+        <view>击落 {{item.kills}} 架{{item.durationText ? ' · 用时 ' + item.durationText : ''}}</view>
+        <view class="sub">{{item.dateStr}}</view>
+      </view>
+      <view class="recent-go">▶ 回放</view>
+    </view>
+  </view>
+
+  <!-- 玩法说明 -->
+  <view class="card">
+    <view class="spread">
+      <view class="h2 stats-title">玩法说明</view>
+      <view class="guide-replay" bindtap="onReplayGuide">🔄 重看新手引导</view>
+    </view>
+    <view class="rule-item" wx:for="{{rules}}" wx:key="index">{{item}}</view>
+  </view>
+
+  <view class="version">{{version}}</view>
+  <button class="btn btn-ghost back-btn" bindtap="goHall">回大厅</button>
+</view>

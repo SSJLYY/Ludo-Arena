@@ -1,0 +1,43 @@
+.die {
+  position: relative;
+  width: 96rpx;
+  height: 96rpx;
+  background: #ffffff;
+  border-radius: 22rpx;
+  box-shadow: 0 6rpx 16rpx rgba(35, 36, 58, 0.16), inset 0 -4rpx 0 rgba(35, 36, 58, 0.08);
+}
+
+.die.rolling {
+  animation: shake 0.3s linear infinite;
+}
+
+@keyframes shake {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-12deg) scale(1.06); }
+  50% { transform: rotate(0deg) scale(0.96); }
+  75% { transform: rotate(12deg) scale(1.06); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.pip {
+  position: absolute;
+  width: 18rpx;
+  height: 18rpx;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.pip.on {
+  background: #23243a;
+}
+
+/* 3×3 点位（0..8） */
+.pos-0 { left: 14rpx; top: 14rpx; }
+.pos-1 { left: 39rpx; top: 14rpx; }
+.pos-2 { left: 64rpx; top: 14rpx; }
+.pos-3 { left: 14rpx; top: 39rpx; }
+.pos-4 { left: 39rpx; top: 39rpx; }
+.pos-5 { left: 64rpx; top: 39rpx; }
+.pos-6 { left: 14rpx; top: 64rpx; }
+.pos-7 { left: 39rpx; top: 64rpx; }
+.pos-8 { left: 64rpx; top: 64rpx; }

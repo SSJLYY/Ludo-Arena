@@ -1,0 +1,8 @@
+{
+  "name": "getLeaderboard",
+  "description": "胜场排行榜（服务端聚合 users，白名单字段）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

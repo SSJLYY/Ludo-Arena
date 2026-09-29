@@ -1,0 +1,8 @@
+{
+  "name": "roomJoin",
+  "description": "加入房间（房号/roomId + 密码校验 + 原子占座）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

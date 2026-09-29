@@ -1,0 +1,8 @@
+{
+  "name": "getWxacode",
+  "description": "生成带参小程序码（scene=roomId）并存云存储",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

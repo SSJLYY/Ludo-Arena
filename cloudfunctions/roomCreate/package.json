@@ -1,0 +1,9 @@
+{
+  "name": "roomCreate",
+  "version": "1.0.0",
+  "description": "创建房间（房号 + 可选密码），quick=true 时预填 3 个 AI 座位",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

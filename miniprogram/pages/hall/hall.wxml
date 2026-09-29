@@ -1,0 +1,152 @@
+<view class="page">
+  <!-- 顶部：标题 + 个人 -->
+  <view class="hero">
+    <view class="hero-title">
+      <text class="h1">飞行棋</text>
+      <text class="hero-sub">AEROPLANE CHESS</text>
+    </view>
+    <view class="profile-chip" bindtap="goMine">
+      <player-avatar url="{{profile.avatarUrl}}" name="{{profile.nickName}}" color="#e8543f" size="72" />
+      <view class="profile-meta">
+        <view class="profile-name">{{profile.nickName || '点击设置昵称'}}</view>
+        <view class="sub">我的战绩 ›</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 继续上局 -->
+  <view class="card last-card" wx:if="{{lastRoom}}" bindtap="goLastRoom">
+    <view class="row">
+      <view class="pulse-dot"></view>
+      <view class="last-info">
+        <view class="h2">继续上局</view>
+        <view class="sub">房号 {{lastRoom.roomNo}} · {{lastRoom.status === 'playing' ? '对局进行中' : '等待中'}} ›</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 主操作 -->
+  <button class="btn btn-primary main-btn" bindtap="quickStart" disabled="{{creating}}">🚀 快速开始（1人 + 3电脑）</button>
+  <button class="btn btn-ghost" bindtap="openCreate">🏠 创建房间</button>
+
+  <!-- 排行榜入口 -->
+  <view class="lb-entry card" aria-label="打开胜场排行榜" bindtap="onShowLeaderboard">
+    <text class="lb-trophy">🏆</text>
+    <view class="lb-entry-text">胜场排行榜</view>
+    <view class="lb-entry-arrow">›</view>
+  </view>
+
+  <!-- 加入房间 -->
+  <view class="card join-card">
+    <view class="h2 join-title">加入房间</view>
+    <view class="join-row">
+      <input class="input join-no" type="number" maxlength="6" placeholder="输入 6 位房号"
+        confirm-type="done" bindconfirm="joinByNo"
+        value="{{joinNo}}" bindinput="onJoinNo" />
+      <view class="paste-btn" aria-label="从剪贴板粘贴房号" bindtap="onPasteRoomNo">📋 粘贴</view>
+    </view>
+    <input wx:if="{{needPwd}}" class="input" type="text" password placeholder="房间密码"
+      confirm-type="done" bindconfirm="joinByNo"
+      value="{{joinPwd}}" bindinput="onJoinPwd" />
+    <button class="btn btn-primary" bindtap="joinByNo">加入</button>
+  </view>
+
+  <view class="footer-tip">掷 6 起飞 · 撞子回家 · 同色跳格 · 先到终点者胜</view>
+
+  <!-- 创建房间弹层 -->
+  <view class="mask" wx:if="{{showCreate}}" catchtap="closeCreate">
+    <view class="popup" catchtap="noop">
+      <view class="h2 popup-title">创建房间</view>
+
+      <view class="form-row spread">
+        <view>
+          <view>房间密码</view>
+          <view class="sub">仅好友可见时可不设</view>
+        </view>
+        <switch checked="{{form.hasPassword}}" data-field="hasPassword" bindchange="onFormToggle" color="#e8543f" />
+      </view>
+      <input wx:if="{{form.hasPassword}}" class="input" type="text" password maxlength="12"
+        placeholder="房间密码" value="{{form.password}}" data-field="password" bindinput="onFormInput" />
+
+      <view class="divider"></view>
+
+      <view class="form-row spread">
+        <view>
+          <view>AI 难度</view>
+          <view class="sub">加入电脑时使用</view>
+        </view>
+        <picker range="{{aiLevels}}" value="{{form.aiLevelIndex}}" bindchange="onAiLevel">
+          <view class="picker-value">{{aiLevels[form.aiLevelIndex]}} ›</view>
+        </picker>
+      </view>
+
+      <view class="form-row spread">
+        <view>
+          <view>终点精确到达</view>
+          <view class="sub">关闭后超出点数往回弹</view>
+        </view>
+        <switch checked="{{form.exactFinish}}" data-field="exactFinish" bindchange="onFormToggle" color="#e8543f" />
+      </view>
+
+      <view class="form-row spread">
+        <view>
+          <view>飞行箭头</view>
+          <view class="sub">落同色箭头格飞跃 12 格</view>
+        </view>
+        <switch checked="{{form.flyArrow}}" data-field="flyArrow" bindchange="onFormToggle" color="#e8543f" />
+      </view>
+
+      <view class="form-row spread">
+        <view>
+          <view>道具卡</view>
+          <view class="sub">击落敌机得卡：🛡护盾 / 🔄重掷</view>
+        </view>
+        <switch checked="{{form.allowItems}}" data-field="allowItems" bindchange="onFormToggle" color="#e8543f" />
+      </view>
+
+      <button class="btn btn-primary popup-btn" bindtap="confirmCreate" disabled="{{creating}}">
+        {{creating ? '创建中…' : '创建并进入'}}
+      </button>
+    </view>
+  </view>
+
+  <!-- 排行榜弹层 -->
+  <view class="mask" wx:if="{{showLeaderboard}}" bindtap="onCloseLeaderboard">
+    <view class="popup" catchtap="noop">
+      <view class="spread">
+        <view class="h2 popup-title">🏆 胜场排行榜</view>
+        <view class="lb-refresh" aria-label="刷新排行榜" catchtap="onShowLeaderboard">🔄</view>
+      </view>
+      <view wx:if="{{lbLoading}}" class="lb-loading">加载中…</view>
+      <block wx:else>
+        <view class="lb-row {{item.rank === lbMyRank ? 'me' : ''}}" wx:for="{{lbRows}}" wx:key="rank">
+          <view class="lb-medal {{item.rank > 3 ? 'plain' : ''}}">{{item.medal}}</view>
+          <player-avatar url="{{item.avatarUrl}}" name="{{item.nickName}}" color="#e8543f" size="68" />
+          <view class="lb-info">
+            <view class="lb-name">{{item.nickName}} <text class="lb-tier">{{item.tierName}}</text></view>
+            <view class="sub">{{item.wins}}胜 / {{item.games}}场 · 击落 {{item.kills}}</view>
+          </view>
+          <view class="lb-rate">{{item.games ? (item.wins * 100 / item.games) : 0}}%</view>
+        </view>
+        <view wx:if="{{!lbRows.length}}" class="lb-empty">
+          <view class="lb-loading">还没有人上榜，快去打第一局！</view>
+          <button class="btn btn-primary lb-start" bindtap="quickStart">🚀 立即开局</button>
+        </view>
+        <view class="lb-me" wx:if="{{lbMe}}">
+          我的排名：{{lbMyRank ? '第 ' + lbMyRank + ' 名' : '未上榜'}} · {{lbMe.wins}}胜 / {{lbMe.games}}场
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 首次引导 -->
+  <view class="mask guide-mask" wx:if="{{showGuide}}" catchtap="onCloseGuide">
+    <view class="popup guide-popup" catchtap="noop">
+      <view class="guide-title">✈️ 欢迎来到飞行棋</view>
+      <view class="guide-step"><text class="guide-num">1</text>掷到 6 点飞机起飞，还能再掷一次</view>
+      <view class="guide-step"><text class="guide-num">2</text>踩到敌机把它撞回基地，落在己色格跳 4 格、箭头格飞 12 格</view>
+      <view class="guide-step"><text class="guide-num">3</text>4 架飞机全部到终点即获胜，好友房号一键加入</view>
+      <button class="btn btn-primary guide-btn" bindtap="onCloseGuide">知道了，开始游戏</button>
+    </view>
+  </view>
+</view>

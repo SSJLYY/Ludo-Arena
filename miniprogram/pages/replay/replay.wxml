@@ -1,0 +1,58 @@
+<view class="rpage" wx:if="{{!loading}}">
+  <!-- 玩家条 -->
+  <view class="players-bar">
+    <view wx:for="{{playersView}}" wx:key="seat"
+      class="p-card {{item.seat === currentSeat ? 'current' : ''}}" style="--pc:{{item.color}}">
+      <player-avatar url="{{item.avatar}}" name="{{item.name}}" color="{{item.color}}" size="60" />
+      <view class="p-meta">
+        <view class="p-nick">{{item.name}}</view>
+        <view class="p-done">{{item.done}}/4 到达</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 终局横幅 -->
+  <view class="end-tip" wx:if="{{ended && winnerName}}">🏆 {{winnerName}} 获胜 · 回放结束</view>
+
+  <!-- 棋盘 -->
+  <view class="board-wrap">
+    <chess-board id="board" size="{{boardSize}}" my-seat="{{-1}}" interactive="{{false}}" show-fly="{{showFly}}" />
+  </view>
+
+  <!-- 关键时刻书签 -->
+  <view class="hl-bar" wx:if="{{showHighlights}}" bindtap="onToggleHighlights">
+    <text>⚡ 关键时刻（{{highlights.length}}）</text>
+    <text class="hl-arrow">{{highlightsOpen ? '▾' : '▸'}}</text>
+  </view>
+  <view class="hl-list" wx:if="{{highlightsOpen}}">
+    <view class="hl-item" wx:for="{{highlights}}" wx:key="idx"
+      data-idx="{{item.idx}}" bindtap="onJumpHighlight">
+      <text class="hl-icon">{{item.icon}}</text>
+      <text class="hl-text">{{item.text}}</text>
+      <text class="hl-frame">第{{item.idx + 1}}手</text>
+    </view>
+  </view>
+  <!-- 播放器 -->
+  <view class="ctrl">
+    <view class="dice-hist" wx:if="{{index > 0}}">
+      <text class="dh-label">最近</text>
+      <view class="dh-item {{idx === diceHistory.length - 1 ? 'latest' : ''}}"
+        wx:for="{{diceHistory}}" wx:for-item="d" wx:for-index="idx" wx:key="idx">{{d}}</view>
+    </view>
+    <slider class="slider" min="0" max="{{total - 1}}" value="{{index}}"
+      activeColor="#e8543f" block-size="20" bindchange="onSlider" />
+    <view class="ctrl-row">
+      <view class="cbtn" aria-label="上一帧" bindtap="onPrev">⏮</view>
+      <view class="cbtn play" aria-label="播放或暂停" bindtap="onTogglePlay">{{playing ? '⏸' : '▶️'}}</view>
+      <view class="cbtn" aria-label="下一帧" bindtap="onNext">⏭</view>
+      <view class="cbtn speed" aria-label="切换播放速度" bindtap="onSpeed">{{speed}}x</view>
+      <view class="pos">{{index + 1}}/{{total}}</view>
+    </view>
+    <view class="dice-line">
+      <text class="actor-name">{{actorName}}</text>
+      <text class="dice-label">点数</text>
+      <dice id="dice" value="{{diceVal}}" />
+    </view>
+    <view class="back" bindtap="goBack">‹ 返回战绩</view>
+  </view>
+</view>

@@ -1,0 +1,4 @@
+<view class="pa" style="width:{{size}}rpx;height:{{size}}rpx;border-color:{{color}};">
+  <image wx:if="{{url}}" class="img" src="{{url}}" mode="aspectFill" />
+  <view wx:else class="fallback" style="background:{{color}}">{{initial}}</view>
+</view>

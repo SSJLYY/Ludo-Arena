@@ -1,0 +1,8 @@
+{
+  "name": "gameStart",
+  "description": "开局（校验房主 + 满4座，引擎生成对局快照）",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

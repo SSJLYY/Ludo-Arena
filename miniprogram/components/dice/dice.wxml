@@ -1,0 +1,3 @@
+<view class="die {{rolling ? 'rolling' : ''}}">
+  <view wx:for="{{pips}}" wx:key="index" class="pip {{item ? 'on' : ''}} pos-{{index}}"></view>
+</view>

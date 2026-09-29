@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./public:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - server
+    restart: unless-stopped
+
+  server:
+    build: ./server
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - AI_STEP_DELAY=700
+      - STATS_DIR=/app/data
+    volumes:
+      - flychess-data:/app/data   # 战绩 SQLite 落盘，容器重建不丢
+    restart: unless-stopped
+
+volumes:
+  flychess-data:

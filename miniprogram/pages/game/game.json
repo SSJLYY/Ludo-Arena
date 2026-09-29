@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "对局",
+  "disableScroll": true,
+  "usingComponents": {
+    "chess-board": "/components/chess-board/chess-board",
+    "dice": "/components/dice/dice",
+    "player-avatar": "/components/player-avatar/player-avatar"
+  }
+}

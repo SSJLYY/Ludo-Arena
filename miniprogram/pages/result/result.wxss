@@ -1,0 +1,147 @@
+.result-head {
+  text-align: center;
+  padding: 32rpx 0 40rpx;
+}
+
+.confetti-canvas {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 90;
+}
+
+.new-ach {
+  margin-top: 18rpx;
+  display: inline-flex;
+  align-items: center;
+  gap: 12rpx;
+  background: rgba(240, 161, 42, 0.12);
+  color: #c07a10;
+  border-radius: 999rpx;
+  padding: 10rpx 28rpx;
+  font-size: 24rpx;
+}
+
+.new-ach-item {
+  font-weight: 600;
+}
+
+.result-title {
+  font-size: 52rpx;
+  font-weight: 800;
+  color: var(--brand);
+}
+
+.rank-row {
+  display: flex;
+  align-items: center;
+  padding: 22rpx 0;
+  border-bottom: 2rpx solid var(--line);
+}
+
+.rank-row:last-child {
+  border-bottom: none;
+}
+
+.medal {
+  width: 80rpx;
+  text-align: center;
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+
+.rank-info {
+  flex: 1;
+  min-width: 0;
+  margin-left: 20rpx;
+}
+
+.rank-name {
+  font-size: 30rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.ai-tag {
+  font-size: 18rpx;
+  color: var(--ink-3);
+  border: 2rpx solid var(--line);
+  border-radius: 6rpx;
+  padding: 0 8rpx;
+}
+
+.rank-color {
+  width: 20rpx;
+  height: 60rpx;
+  border-radius: 10rpx;
+  flex-shrink: 0;
+}
+
+.stat-strip {
+  margin-top: 24rpx;
+  display: flex;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.result-ops {
+  margin-top: 36rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.poster-mask {
+  align-items: center;
+  justify-content: center;
+}
+
+.poster-body {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.poster-img {
+  width: 100%;
+  border-radius: 20rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0, 0, 0, 0.4);
+}
+
+.poster-ops {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 28rpx;
+  width: 100%;
+}
+
+.save-btn {
+  flex: 1;
+  height: 84rpx;
+  line-height: 84rpx;
+  font-size: 28rpx;
+}
+
+/* 离屏画布：不可见但可绘制 */
+.poster-canvas {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  width: 600px;
+  height: 960px;
+}

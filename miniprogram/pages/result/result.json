@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "战绩",
+  "usingComponents": {
+    "player-avatar": "/components/player-avatar/player-avatar"
+  }
+}

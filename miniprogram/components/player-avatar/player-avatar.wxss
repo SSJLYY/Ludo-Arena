@@ -1,0 +1,21 @@
+.pa {
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(35, 36, 58, 0.12);
+  flex-shrink: 0;
+}
+
+.img,
+.fallback {
+  width: 100%;
+  height: 100%;
+}
+
+.fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.45em;
+}

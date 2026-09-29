@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "飞行棋",
+  "usingComponents": {
+    "player-avatar": "/components/player-avatar/player-avatar"
+  }
+}

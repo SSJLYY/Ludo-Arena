@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>棋盘预览</title>
+<style>
+  body { margin: 0; background: #e6ebfa; display: flex; gap: 20px; padding: 20px; flex-wrap: wrap; }
+  canvas { background: #fff; border-radius: 16px; box-shadow: 0 8px 30px rgba(60,70,140,.25); }
+</style>
+</head>
+<body>
+<canvas id="b1" width="640" height="640"></canvas>
+<canvas id="b2" width="640" height="640"></canvas>
+<script src="/js/board.js"></script>
+<script>
+  // 构造一个 mock 对局：各色飞机分布在基地/主环/航道/终点
+  const game = {
+    players: [
+      { seat: 0, color: 'red', planes: [
+        { id: 0, state: 'base', rp: -1 },
+        { id: 1, state: 'main', rp: 8 },
+        { id: 2, state: 'lane', rp: 54 },
+        { id: 3, state: 'finished', rp: 57 },
+      ]},
+      { seat: 1, color: 'yellow', planes: [
+        { id: 0, state: 'base', rp: -1 },
+        { id: 1, state: 'main', rp: 20 },
+        { id: 2, state: 'main', rp: 36, shield: true },
+        { id: 3, state: 'base', rp: -1 },
+      ]},
+      { seat: 2, color: 'blue', planes: [
+        { id: 0, state: 'main', rp: 4 },
+        { id: 1, state: 'main', rp: 30 },
+        { id: 2, state: 'base', rp: -1 },
+        { id: 3, state: 'lane', rp: 53 },
+      ]},
+      { seat: 3, color: 'green', planes: [
+        { id: 0, state: 'base', rp: -1 },
+        { id: 1, state: 'main', rp: 44 },
+        { id: 2, state: 'main', rp: 12 },
+        { id: 3, state: 'base', rp: -1 },
+      ]},
+    ],
+  };
+  // 图1：红方视角 + 红1 可走高亮
+  Board.setMyView('red');
+  Board.drawScene(document.getElementById('b1'), game,
+    { mySeat: 0, phase: 'selecting', currentSeat: 0, movable: [1] });
+  // 图2：蓝方视角（验证旋转移位后的视觉）
+  Board.setMyView('blue');
+  Board.drawScene(document.getElementById('b2'), game, { mySeat: 2 });
+  document.title = '棋盘预览就绪';
+</script>
+</body>
+</html>

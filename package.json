@@ -1,0 +1,18 @@
+{
+  "name": "flight-chess",
+  "version": "1.28.0",
+  "private": true,
+  "description": "飞行棋 · 在线对战（网页版主线 + 历史小程序版）",
+  "scripts": {
+    "test": "node tests/run-tests.js",
+    "test:cloud": "node tests/run-cloud-tests.js",
+    "sync": "node tools/sync-engine.js",
+    "bench": "node tests/run-bench.js",
+    "check:wxml": "node tools/check-wxml.js",
+    "test:web": "node tests/test-identity.js && node tests/test-hardening.js && node tests/test-anti-abuse.js && node tests/test-fairness.js && node tests/test-season.js && node tests/test-mail.js && node tests/test-mail-ach.js && node tests/test-replay-clean.js && node tests/test-tournament.js && node tests/test-admin-ops.js && node tests/test-pwd-lock.js && node tests/self-play.js && node tests/integration.js",
+    "test:unit": "node tests/test-mail-ach.js && node tests/test-replay-clean.js && node tests/run-tests.js",
+    "verify:backup": "node tests/verify-backup.js",
+    "load": "node tests/load-test.js",
+    "e2e": "node tests/test-e2e.js"
+  }
+}

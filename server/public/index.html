@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#e6ebfa" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="飞行棋" />
+  <title>飞行棋 · 在线对战</title>
+  <meta name="app-version" content="v44" />
+  <meta name="description" content="经典飞行棋在线对战：好友同房、人机练习、每日任务、锦标赛与赛季排行，手机浏览器即开即玩。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="飞行棋 · 在线对战" />
+  <meta property="og:description" content="经典飞行棋在线对战：好友同房、人机练习、每日任务、锦标赛与赛季排行，手机浏览器即开即玩。" />
+  <meta property="og:url" content="http://129.211.29.228/" />
+  <meta property="og:image" content="/icon.svg" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<!-- ==================== SVG 图标库 ==================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-plane" viewBox="0 0 24 24">
+      <path d="M12 2.2c.7 0 1.26.56 1.26 1.26v5.06l7.02 4.02c.34.2.55.55.55.94v1.5c0 .4-.32.72-.72.72h-4.1l-1.5 4.5c-.14.42-.53.7-.97.7h-1.06c-.62 0-1.08-.59-.92-1.19l.72-2.71-3.6 1.2-3.6-1.2.72 2.71c.16.6-.3 1.19-.92 1.19H6.82c-.44 0-.83-.28-.97-.7l-1.5-4.5H.29c-.4 0-.72-.32-.72-.72v-1.5c0-.39.21-.74.55-.94l7.02-4.02V3.46C6.74 2.76 7.3 2.2 8 2.2h4z"
+        fill="currentColor"/>
+    </symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24">
+      <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.5 8.5a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zm7 0a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zM12 10.9a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zM8.5 15.2a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6zm7 0a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6z"
+        fill="currentColor"/>
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.53.85l10-6.5a1 1 0 0 0 0-1.7l-10-6.5A1 1 0 0 0 8 5.5z" fill="currentColor"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4a1.5 1.5 0 0 1 1.5 1.5V11h5.5a1.5 1.5 0 0 1 0 3H13.5v5.5a1.5 1.5 0 0 1-3 0V14H5a1.5 1.5 0 0 1 0-3h5.5V5.5A1.5 1.5 0 0 1 12 4z" fill="currentColor"/></symbol>
+    <symbol id="i-login" viewBox="0 0 24 24"><path d="M11 3a1 1 0 0 1 1 1v5h6a1 1 0 0 1 .78 1.63l-6.5 8A1 1 0 0 1 10.5 18v-2.2l-3.9 1.3A2 2 0 0 1 4 15.2v-1.5c0-3.1 1.6-5.9 4.2-7.5l2.8-1.7V4a1 1 0 0 1 1-1z" fill="currentColor"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M18 4V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5V4H2v3a4 4 0 0 0 3.4 3.95A6.5 6.5 0 0 0 10 14.9V18H6.5a.5.5 0 0 0-.5.5V21h12v-2.5a.5.5 0 0 0-.5-.5H14v-3.1a6.5 6.5 0 0 0 4.6-3.95A4 4 0 0 0 22 7V4h-4zm2 3a2 2 0 0 1-1.6 1.96A6 6 0 0 0 20 7V6h-2v3.02A4.49 4.49 0 0 1 18 8.98V7zM4 7v-.02A6 6 0 0 0 5.6 8.96 2 2 0 0 1 4 7z" fill="currentColor"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M12 2.5a1.4 1.4 0 0 1 1.4 1.4v.6A6.1 6.1 0 0 1 18 10.5v3.6l1.6 2.5a.9.9 0 0 1-.76 1.4H5.16a.9.9 0 0 1-.76-1.4L6 14.1v-3.6a6.1 6.1 0 0 1 4.6-6v-.6A1.4 1.4 0 0 1 12 2.5zM9.8 19.5h4.4a2.2 2.2 0 0 1-4.4 0z" fill="currentColor"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 3.5A1.5 1.5 0 0 1 5.5 2H10a2 2 0 0 1 2 2v15a1.5 1.5 0 0 0-1.5-1.5H5.5A1.5 1.5 0 0 1 4 16V3.5zm16 0A1.5 1.5 0 0 0 18.5 2H14a2 2 0 0 0-2 2v15a1.5 1.5 0 0 1 1.5-1.5h5A1.5 1.5 0 0 0 20 16V3.5z" fill="currentColor"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><path d="M9 2h9a2 2 0 0 1 2 2v11h-2V4H9V2zm-4 4h9a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z" fill="currentColor"/></symbol>
+    <symbol id="i-robot" viewBox="0 0 24 24"><path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4zm-2 6h4V6a2 2 0 1 0-4 0v2zm-1 4a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zm6 0a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8zM9 15.5h6a1 1 0 0 1 0 2H9a1 1 0 0 1 0-2z" fill="currentColor"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><path d="M12 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 11.5c4.7 0 8.5 2.6 8.5 5.8 0 1.5-1.1 2.7-2.5 2.7H6c-1.4 0-2.5-1.2-2.5-2.7 0-3.2 3.8-5.8 8.5-5.8z" fill="currentColor"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2l8 3v6.5c0 5-3.4 9.3-8 10.5-4.6-1.2-8-5.5-8-10.5V5l8-3zm0 2.2L6 6.5v5c0 3.9 2.5 7.3 6 8.4 3.5-1.1 6-4.5 6-8.4v-5l-6-2.3z" fill="currentColor"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 4a8 8 0 0 1 7.4 5H16.8A5.5 5.5 0 0 0 6.9 9.2L9 11H3V5l2.4 2.4A8 8 0 0 1 12 4zm0 16a8 8 0 0 1-7.4-5H7.2a5.5 5.5 0 0 0 9.9-3.2L15 13h6V7l-2.4 2.4A8 8 0 0 1 12 20z" fill="currentColor"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M12 4.5C6.6 4.5 2.3 8.4 1 12c1.3 3.6 5.6 7.5 11 7.5S22.7 15.6 24 12c-1.3-3.6-5.6-7.5-11-7.5zm0 12.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0-2.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="currentColor"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm2 3v3h2V6H6zm4 0v3h2V6h-2zm4 0v3h2V6h-2zm-8 5v3h2v-3H6zm4 0v3h2v-3h-2zm4 0v3h2v-3h-2zm-8 5v3h2v-3H6zm4 0v3h2v-3h-2zm4 0v3h2v-3h-2z" fill="currentColor"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h3l5-4.5v15L7 15H4V9zm11.5-1.6a5.5 5.5 0 0 1 0 9.2v-2a3.5 3.5 0 0 0 0-5.2v-2zm0-4a9.5 9.5 0 0 1 0 17v-2a7.5 7.5 0 0 0 0-13v-2z" fill="currentColor"/></symbol>
+    <symbol id="i-vibrate" viewBox="0 0 24 24"><path d="M9 3h6a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM3 9v6a1 1 0 0 1-2 0V9a1 1 0 0 1 2 0zm20 0v6a1 1 0 0 1-2 0V9a1 1 0 0 1 2 0zm-4-3v12a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0zM7 6v12a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0z" fill="currentColor"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2l2.2 6.4L21 10.5l-5.4 4 1.4 6.6L12 17.6 7 21.1l1.4-6.6L3 10.5l6.8-2.1L12 2z" fill="currentColor"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M3 20.5l18-8.5L3 3.5 3 10l12 2-12 2v6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-exit" viewBox="0 0 24 24"><path d="M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5a1 1 0 0 1 0-2H5V5h5a1 1 0 0 1 0-2zm7.3 4.3l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l2.29-2.3H10a1 1 0 0 1 0-2h8.09l-2.3-2.3a1 1 0 0 1 1.42-1.4z" fill="currentColor"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm0 2a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm9 2.3-.2 1.1 1.6 1.3-1.5 2.6-1.9-.8a6.8 6.8 0 0 1-1.6 1l-.3 2H10.9l-.3-2a6.8 6.8 0 0 1-1.6-1l-1.9.8-1.5-2.6L6.2 14.9 6 13.8a6.8 6.8 0 0 1 0-3.6l.2-1.1L4.6 7.8 6.1 5.2l1.9.8c.5-.4 1-.7 1.6-1l.3-2h2.2l.3 2c.6.3 1.1.6 1.6 1l1.9-.8 1.5 2.6-1.6 1.3.2 1.1a6.8 6.8 0 0 1 0 3.6z" fill="currentColor"/></symbol>
+    <symbol id="i-friends" viewBox="0 0 24 24"><path d="M8 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zm0 1.5c3 0 5.5 1.7 5.5 3.8 0 1-.8 1.7-1.8 1.7H4.3c-1 0-1.8-.7-1.8-1.7 0-2.1 2.5-3.8 5.5-3.8zm8.5-1.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm.5 1.4c.3.1.6.3.9.5 1.7.6 2.6 1.6 2.6 2.7 0 .7-.5 1.2-1.2 1.4.4-.5.7-1.1.7-1.8 0-1.3-1.2-2.3-2.9-2.8.3-.3.6-.6.9-1z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<!-- ==================== 顶栏 ==================== -->
+<header class="topbar">
+  <span class="logo">
+    <span class="logo-mark"><svg><use href="#i-plane"/></svg></span>
+    <b>飞行棋</b>
+  </span>
+  <span class="topbar-right">
+    <button id="tglSfx" class="icon-btn sq" title="音效"><svg><use href="#i-sound"/></svg></button>
+    <button id="tglVib" class="icon-btn sq" title="震动"><svg><use href="#i-vibrate"/></svg></button>
+    <button id="btnRules" class="icon-btn" title="玩法规则"><svg><use href="#i-book"/></svg><span>规则</span></button>
+    <button id="btnMail" class="icon-btn sq" title="战报中心" aria-label="战报中心"><svg><use href="#i-bell"/></svg><em id="mailDot" class="dot-badge" hidden></em></button>
+    <button id="btnTour" class="icon-btn" title="锦标赛" aria-label="锦标赛"><svg><use href="#i-trophy"/></svg><span>锦标</span></button>
+    <button id="btnLb" class="icon-btn" title="战绩榜"><svg><use href="#i-trophy"/></svg><span>战绩</span></button>
+    <button id="btnSign" class="icon-btn" title="每日签到领金币"><svg><use href="#i-spark"/></svg><span id="coinNum">🪙0</span></button>
+    <button id="btnShop" class="icon-btn" title="皮肤商店"><svg><use href="#i-shield"/></svg><span>皮肤</span></button>
+    <button id="btnProfile" class="icon-btn" title="我的战绩"><svg><use href="#i-user"/></svg><span>我的</span></button>
+    <button id="btnAdmin" class="icon-btn" title="后台管理"><svg><use href="#i-robot"/></svg><span>后台</span></button>
+    <button id="btnFriends" class="icon-btn" title="好友"><svg><use href="#i-friends"/></svg><span>好友</span></button>
+    <button id="btnGuild" class="icon-btn" title="公会"><svg><use href="#i-friends"/></svg><span>公会</span></button>
+    <button id="btnBonus" class="icon-btn" title="福利中心（订阅/周任务/海报）"><svg><use href="#i-spark"/></svg><span>福利</span></button>
+    <button id="btnSettings" class="icon-btn" title="设置"><svg><use href="#i-gear"/></svg><span>设置</span></button>
+    <span id="connDot" class="dot off" title="连接状态"></span>
+    <span id="serverStat" class="server-stat" title="服务器在线情况">…</span>
+  </span>
+</header>
+
+<!-- ==================== 大厅视图 ==================== -->
+<section id="view-lobby" class="view active">
+  <div id="announceBar" class="announce-bar" hidden></div>
+  <div id="banner" class="banner" hidden></div>
+  <div class="lobby-left">
+    <div class="hero">
+      <div class="hero-art">
+        <div class="ha-ring"></div>
+        <div class="ha-ring r2"></div>
+        <div class="ha-core"><svg style="color:#fff"><use href="#i-plane"/></svg></div>
+        <i class="ha-dot d1"></i><i class="ha-dot d2"></i><i class="ha-dot d3"></i><i class="ha-dot d4"></i>
+      </div>
+      <h1>飞行棋 · 在线对战</h1>
+      <p>经典四色空战，掷 6 起飞、撞子返航、叠子突进。邀请好友实时对局，或单挑三台电脑 AI，打开就能玩。</p>
+      <div class="hero-feats">
+        <span class="hf"><svg><use href="#i-user"/></svg>真人实时对战</span>
+        <span class="hf"><svg><use href="#i-robot"/></svg>三档 AI 陪练</span>
+        <span class="hf"><svg><use href="#i-trophy"/></svg>战绩排行榜</span>
+        <span class="hf"><svg><use href="#i-film"/></svg>对局可回放</span>
+        <span class="hf"><svg><use href="#i-spark"/></svg>段位与成就</span>
+      </div>
+    </div>
+
+    <details class="rules card">
+      <summary><svg><use href="#i-spark"/></svg>三分钟上手玩法</summary>
+      <div class="r-body">
+        <div class="rule-item"><span class="r-ico">🎲</span><div><b>掷 6 起飞</b>：每回合先掷骰，掷出 6 才能把一架飞机从基地送上起飞点，并可再掷一次；连续三个 6 本回合作废。</div></div>
+        <div class="rule-item"><span class="r-ico">✈️</span><div><b>叠子与撞子</b>：己方飞机可重叠同行；落在有敌机的普通格会把它撞回基地，并额外获得一次掷骰。</div></div>
+        <div class="rule-item"><span class="r-ico">⭐</span><div><b>安全格</b>：四个起飞点（带 ★）上的飞机不会被撞，是关键的避风港。</div></div>
+        <div class="rule-item"><span class="r-ico">🛫</span><div><b>飞行箭头</b>：停在己方颜色的 ✈ 格，可沿航线一次飞跃 12 格。</div></div>
+        <div class="rule-item"><span class="r-ico">🛡️</span><div><b>道具</b>：撞落敌机有概率获得护盾卡（自动挂载到最前方飞机，被撞时抵消并反震对方）或重掷卡（选机阶段重掷一次）。</div></div>
+        <div class="rule-item"><span class="r-ico">🏆</span><div><b>获胜</b>：绕场一周进入归航道，最先让 4 架飞机全部到家的玩家获胜。</div></div>
+      </div>
+    </details>
+  </div>
+
+  <div class="lobby-right">
+    <div class="card">
+      <div class="card-title"><span class="ct-bar"></span>开始游戏</div>
+      <div class="entry-grid">
+        <button id="btnQuick" class="entry gold">
+          <span class="e-ico"><svg><use href="#i-robot"/></svg></span>
+          <span class="e-txt"><b>快速开始</b><span>单机练习：你 + 3 台电脑 AI</span></span>
+          <span class="e-go"><svg><use href="#i-chev"/></svg></span>
+        </button>
+        <button id="btnCreate" class="entry">
+          <span class="e-ico"><svg><use href="#i-plus"/></svg></span>
+          <span class="e-txt"><b>创建房间</b><span>拿到房间号，邀请好友加入</span></span>
+          <span class="e-go"><svg><use href="#i-chev"/></svg></span>
+        </button>
+        <button id="btnJoin" class="entry cyan">
+          <span class="e-ico"><svg><use href="#i-login"/></svg></span>
+          <span class="e-txt"><b>加入房间</b><span>输入 6 位房间号即可入座</span></span>
+          <span class="e-go"><svg><use href="#i-chev"/></svg></span>
+        </button>
+        <button id="btnMatch" class="entry purple">
+          <span class="e-ico"><svg><use href="#i-spark"/></svg></span>
+          <span class="e-txt"><b>天梯匹配</b><span>按段位匹配对手，秒开真人对局</span></span>
+          <span class="e-go"><svg><use href="#i-chev"/></svg></span>
+        </button>
+        <button id="btnPve" class="entry green">
+          <span class="e-ico"><svg><use href="#i-trophy"/></svg></span>
+          <span class="e-txt"><b>闯关模式</b><span id="pveSub">10 关递进难度，通关拿金币</span></span>
+          <span class="e-go"><svg><use href="#i-chev"/></svg></span>
+        </button>
+        <button id="btnPuzzle" class="entry rose">
+          <span class="e-ico"><svg><use href="#i-dice"/></svg></span>
+          <span class="e-txt"><b>每日残局</b><span id="puzzleSub">固定骰序解谜，每天一题</span></span>
+          <span class="e-go"><svg><use href="#i-chev"/></svg></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="card" id="cardCreate">
+      <div class="card-title"><span class="ct-bar"></span>创建房间</div>
+      <label>你的昵称<input id="createNick" type="text" maxlength="8" placeholder="给自己起个名" /></label>
+      <label>房间密码（可选）<input id="createPwd" type="text" maxlength="12" placeholder="留空则无密码" /></label>
+      <label>AI 难度
+        <select id="createLevel">
+          <option value="1">简单 · 新手友好</option>
+          <option value="2" selected>普通 · 势均力敌</option>
+          <option value="3">困难 · 老谋深算</option>
+          <option value="4">大师 · 算无遗策</option>
+        </select>
+      </label>
+      <label>对局模式
+        <select id="createMode">
+          <option value="1" selected>🎲 经典单骰 · 一次掷 1 颗</option>
+          <option value="2">🎲🎲 双骰狂野 · 一次掷 2 颗，逐个走</option>
+          <option value="3">🎲🎲🎲 三骰狂欢 · 一次掷 3 颗，逐个走</option>
+        </select>
+      </label>
+      <label>系列赛（多局积分）
+        <select id="createSeries">
+          <option value="1" selected>单局 · 一局定胜负</option>
+          <option value="3">3 局积分赛 · 累计总分争冠军</option>
+          <option value="5">5 局积分赛 · 累计总分争冠军</option>
+          <option value="7">7 局积分赛 · 累计总分争冠军</option>
+        </select>
+      </label>
+      <div class="rules-toggles">
+        <div class="rt-title">规则开关</div>
+        <label class="rt"><span class="rt-name">精确到达终点<em>超出终点点数回弹</em></span><button type="button" class="switch on" data-rule="needExactFinish"></button></label>
+        <label class="rt"><span class="rt-name">同色格跳格</span><button type="button" class="switch on" data-rule="allowJump"></button></label>
+        <label class="rt"><span class="rt-name">飞行箭头飞跃</span><button type="button" class="switch on" data-rule="allowFly"></button></label>
+        <label class="rt"><span class="rt-name">道具系统</span><button type="button" class="switch on" data-rule="allowItems"></button></label>
+        <label class="rt"><span class="rt-name">防挂机倒计时</span><select class="rt-sel" data-rule="turnSeconds"><option value="0">关闭</option><option value="15">15 秒</option><option value="30" selected>30 秒</option><option value="60">60 秒</option></select></label>
+        <label class="rt"><span class="rt-name">2v2 团队赛<em>座位 0·1 红队 / 2·3 蓝队，整队到家获胜</em></span><button type="button" class="switch" data-rule="teamMode"></button></label>
+        <label class="rt"><span class="rt-name">淘汰赛<em>每局末名出局转观战，最后剩下的人夺冠（需配合系列赛）</em></span><button type="button" class="switch" data-rule="knockout"></button></label>
+        <label class="rt"><span class="rt-name">任意点数起飞<em>关闭时须掷 6 才能出机；开启后任意点数都能起飞</em></span><button type="button" class="switch" data-rule="takeoffAny"></button></label>
+        <label class="rt"><span class="rt-name">撞子回基地<em>关闭 = 和平模式，落在敌方头顶不再撞回</em></span><button type="button" class="switch on" data-rule="crashBack"></button></label>
+        <label class="rt"><span class="rt-name">极速模式<em>AI 步频与动画全面加速，一局更短</em></span><button type="button" class="switch" data-rule="turbo"></button></label>
+        <label class="rt"><span class="rt-name">回合上限<em>打满仍未分胜负时，按总进度领先者判胜</em></span><select class="rt-sel" data-rule="roundLimit"><option value="0" selected>不限</option><option value="20">20 回合</option><option value="40">40 回合</option><option value="60">60 回合</option></select></label>
+      </div>
+      <p class="tip" id="modeTip">掷出 6 点可再掷一次，连掷 3 次 6 本回合作废。</p>
+      <button id="btnCreateGo" class="primary">创建房间</button>
+    </div>
+
+    <div class="card" id="cardJoin">
+      <div class="card-title"><span class="ct-bar"></span>加入房间</div>
+      <label>房间号<input id="joinNo" type="text" maxlength="6" inputmode="numeric" placeholder="6 位房间号" autocomplete="off" /></label>
+      <label>你的昵称<input id="joinNick" type="text" maxlength="8" placeholder="给自己起个名" /></label>
+      <label>房间密码（若有）<input id="joinPwd" type="text" maxlength="12" placeholder="无密码留空" /></label>
+      <button id="btnJoinGo" class="primary">加入房间</button>
+      <p class="tip">房间满员或只想看热闹，可以输入房间号后直接<b>观战</b>，还能随时接管空着的电脑座位。</p>
+    </div>
+
+    <!-- v7 在线房间大厅 -->
+    <div class="card" id="cardHall">
+      <div class="card-title">
+        <span class="ct-bar"></span>在线房间
+        <button id="btnHallRefresh" class="card-act" title="刷新"><svg><use href="#i-refresh"/></svg></button>
+      </div>
+      <div id="roomHall" class="room-hall"><div class="rh-empty">加载中…</div></div>
+    </div>
+
+    <!-- v7 历史回放 -->
+    <div class="card" id="cardReplays">
+      <div class="card-title">
+        <span class="ct-bar"></span>精彩回放
+        <button id="btnReplaysRefresh" class="card-act" title="刷新"><svg><use href="#i-refresh"/></svg></button>
+      </div>
+      <div id="replayHall" class="replay-hall"><div class="rh-empty">加载中…</div></div>
+    </div>
+
+    <!-- v31 今日待办（留存清单：签到/任务/残局/锦标赛） -->
+    <div class="card" id="todoCard">
+      <div class="card-title"><span class="ct-bar"></span>今日待办</div>
+      <div id="todoList" class="todo-list"></div>
+    </div>
+    <!-- v13 限时活动（后台配置，无活动自动隐藏） -->
+    <div class="card" id="cardEvents" hidden>
+      <div class="card-title"><span class="ct-bar"></span>限时活动</div>
+      <div id="eventList" class="event-list"></div>
+    </div>
+  </div>
+
+  <div id="installBar" class="install-bar" hidden>
+    <span>📱 安装「飞行棋」到桌面，全屏畅玩</span>
+    <button id="btnInstallGo" class="primary small">安装</button>
+    <button id="btnInstallSkip" class="ghost small">暂不</button>
+  </div>
+</section>
+
+<!-- ==================== 房间视图 ==================== -->
+<section id="view-room" class="view">
+  <div class="room-hero">
+    <div class="room-no-wrap">
+      <div class="room-no-label">房间号</div>
+      <div class="room-no" id="roomNoText">------</div>
+      <div class="room-sub"><i class="pulse-dot"></i><span id="roomStatusText">等待玩家加入…</span></div>
+      <div class="room-mode" id="roomModeText">🎲 经典单骰</div>
+      <div class="room-series" id="roomSeriesText" hidden></div>
+      <div class="room-rules" id="roomRules"></div>
+    </div>
+    <div class="rh-actions">
+      <button id="btnShare" class="btn btn-ghost btn-sm"><svg><use href="#i-copy"/></svg>复制房间号</button>
+      <button id="btnRules2" class="btn btn-ghost btn-sm"><svg><use href="#i-book"/></svg>规则</button>
+    </div>
+  </div>
+
+  <div id="seatList" class="seat-list"></div>
+  <div id="roomSpectators" class="room-spectators"></div>
+
+  <!-- v13 自定义规则（仅房主可见可改，开局后锁定） -->
+  <div id="rulesPanel" class="rules-panel" hidden>
+    <div class="rp-head">
+      <span class="rp-title">⚙️ 自定义规则</span>
+      <span class="rp-hint">仅房主可改 · 开局后锁定</span>
+    </div>
+    <div class="rp-grid">
+      <label class="rp-item"><input type="checkbox" id="rpTakeoffAny"><span>🎲 任意点数起飞</span></label>
+      <label class="rp-item"><input type="checkbox" id="rpCrashBack"><span>💥 撞子回基地</span></label>
+      <label class="rp-item"><input type="checkbox" id="rpTurbo"><span>⚡ 极速模式</span></label>
+      <label class="rp-item"><input type="checkbox" id="rpNeedExact"><span>🎯 精确到达</span></label>
+      <label class="rp-item"><input type="checkbox" id="rpItems"><span>💣 道具卡</span></label>
+      <label class="rp-item"><input type="checkbox" id="rpTeam"><span>🤝 2v2 团队赛</span></label>
+      <label class="rp-item"><input type="checkbox" id="rpKnockout"><span>☠️ 淘汰赛</span></label>
+      <label class="rp-item rp-sel"><span>🔢 回合上限</span>
+        <select id="rpRoundLimit">
+          <option value="0">不限</option><option value="20">20</option>
+          <option value="40">40</option><option value="60">60</option>
+        </select>
+      </label>
+      <label class="rp-item rp-sel"><span>🎲 骰子数</span>
+        <select id="rpDiceMode">
+          <option value="1">1 颗（经典）</option><option value="2">2 颗</option><option value="3">3 颗</option>
+        </select>
+      </label>
+      <label class="rp-item rp-sel"><span>🏆 系列赛</span>
+        <select id="rpSeries">
+          <option value="1">单局</option><option value="3">3 局</option><option value="5">5 局</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="room-actions">
+    <button id="btnStart" class="primary" disabled>开始游戏</button>
+    <button id="btnLeaveRoom" class="ghost"><svg style="width:15px;height:15px"><use href="#i-exit"/></svg>离开</button>
+  </div>
+  <p class="tip">座位可设为「玩家」或「电脑」。设 3 台电脑就是单人练习，设 2 台就是双人模式；四色都坐满（真人 + 电脑合计 4 席）即可开局。掉线会自动托管，重连连回来还能接着打。</p>
+</section>
+
+<!-- ==================== 对局视图 ==================== -->
+<section id="view-game" class="view">
+  <div class="game-main">
+    <div class="game-head">
+      <div id="turnInfo" class="turn-info"><i class="ti-dot"></i><span id="turnText">准备中…</span></div>
+      <button id="btnQuit" class="btn btn-ghost btn-sm"><svg><use href="#i-exit"/></svg>退出</button>
+    </div>
+
+    <div class="board-wrap">
+      <canvas id="board" width="420" height="420"></canvas>
+    </div>
+
+    <div id="meBar" class="me-bar">
+      <span id="meColor" class="me-color"></span>
+      <span id="meText" class="me-text">你是 —</span>
+      <span id="meProgress" class="me-progress"></span>
+    </div>
+
+    <!-- 观战横幅 -->
+    <div id="spectatorBar" class="spectator-bar" hidden>
+      <span class="sp-tag"><svg style="width:13px;height:13px;vertical-align:-2px"><use href="#i-eye"/></svg> 观战中</span>
+      <span id="spCount" class="sp-count"></span>
+      <div id="spTakeover" class="sp-takeover"></div>
+    </div>
+
+    <!-- 回放控制条 -->
+    <div id="replayBar" class="replay-bar" hidden>
+      <button id="btnReplayPlay" class="ghost small">⏸ 暂停</button>
+      <button id="btnReplayLink" class="ghost small" title="复制回放链接，发给好友一起看">🔗 分享</button>
+      <button class="replay-speed" data-speed="1">1x</button>
+      <button class="replay-speed" data-speed="2">2x</button>
+      <button class="replay-speed" data-speed="4">4x</button>
+      <input id="replaySeek" class="replay-seek" type="range" min="0" max="0" value="0" />
+      <!-- v22 回放关键时刻书签（击落/到家/胜负，自动提取） -->
+      <div id="replayMarks" class="replay-marks" hidden></div>
+      <span id="replayIdx" class="replay-idx">0/0</span>
+      <button id="btnReplayExit" class="ghost small">退出</button>
+    </div>
+
+    <!-- 表情互动 -->
+    <div id="emojiBar" class="emoji-bar" hidden>
+      <button class="emoji-btn" data-emoji="😂">😂</button>
+      <button class="emoji-btn" data-emoji="👍">👍</button>
+      <button class="emoji-btn" data-emoji="🔥">🔥</button>
+      <button class="emoji-btn" data-emoji="💥">💥</button>
+      <button class="emoji-btn" data-emoji="🎉">🎉</button>
+      <button class="emoji-btn" data-emoji="😭">😭</button>
+      <button class="emoji-btn" data-emoji="😡">😡</button>
+      <button class="emoji-btn" data-emoji="👏">👏</button>
+      <button class="emoji-btn" data-emoji="🤔">🤔</button>
+      <button class="emoji-btn" data-emoji="💪">💪</button>
+      <button class="emoji-btn" data-emoji="🎯">🎯</button>
+      <button class="emoji-btn" data-emoji="😅">😅</button>
+      <span id="emojiCd" class="emoji-cd"></span>
+    </div>
+  </div>
+
+  <aside class="game-side">
+    <div class="dice-area">
+      <div id="turnTimer" class="turn-timer">
+        <span class="tt-num">⏱ 30s</span>
+        <div class="tt-bar"><i></i></div>
+      </div>
+      <!-- v10 多骰模式：骰子数量由房间的 diceMode 决定，JS 动态渲染 -->
+      <div id="diceRow" class="dice-row" data-n="1"></div>
+      <div class="dice-btns">
+        <button id="btnRoll" class="primary" disabled><svg style="width:17px;height:17px"><use href="#i-dice"/></svg>掷骰子</button>
+        <div style="display:flex;gap:8px">
+          <button id="btnReroll" class="ghost small" hidden><svg style="width:14px;height:14px"><use href="#i-refresh"/></svg><span id="btnRerollTxt">重掷</span></button>
+          <button id="btnHost" class="ghost small" hidden><svg style="width:14px;height:14px"><use href="#i-robot"/></svg><span id="btnHostTxt">托管</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="itemBar" class="item-bar"></div>
+    <div id="sidePlayers" class="side-players"></div>
+
+    <div id="quickChat" class="quick-chat">
+      <button class="qc">快点儿啊~</button>
+      <button class="qc">好棋！</button>
+      <button class="qc">承让承让</button>
+      <button class="qc">运气而已</button>
+      <button class="qc">再来一局？</button>
+      <button class="qc">抱歉抱歉</button>
+      <button class="qc">GG</button>
+      <button class="qc">这把稳了</button>
+      <button class="qc">哈哈哈</button>
+      <button class="qc">别走啊</button>
+      <button class="qc">等我再掷</button>
+      <button class="qc">牛！</button>
+    </div>
+    <div id="chat" class="chat"></div>
+    <div class="chat-input">
+      <input id="chatText" type="text" maxlength="60" placeholder="说点什么…" />
+      <button id="btnSend" class="btn btn-primary btn-sm"><svg><use href="#i-send"/></svg></button>
+    </div>
+  </aside>
+</section>
+
+<!-- 战绩榜弹窗 -->
+<!-- ==================== v21 锦标赛 ==================== -->
+<div id="modal-tour" class="modal">
+  <div class="modal-box">
+    <h3><svg><use href="#i-trophy"/></svg> 锦标赛 · 8 人单败</h3>
+    <div id="tourBody" style="max-height:56vh;overflow:auto"></div>
+    <button id="btnTourClose" class="ghost" style="width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- ==================== v18 战报中心（站内信） ==================== -->
+<div id="modal-mail" class="modal">
+  <div class="modal-box">
+    <h3><svg><use href="#i-bell"/></svg> 战报中心</h3>
+    <div id="mailList" class="lb-list" style="max-height:52vh;overflow:auto"></div>
+    <button id="btnMailClose" class="ghost" style="width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- ==================== v17 名人堂弹窗容器占位前：战绩榜 ==================== -->
+<div id="modal-lb" class="modal">
+  <div class="modal-box">
+    <h3><svg><use href="#i-trophy"/></svg> 战绩榜</h3>
+    <div class="lb-search">
+      <input id="lbNick" type="text" maxlength="16" placeholder="输入昵称查个人战绩" />
+      <button id="btnLbQuery" class="primary small">查询</button>
+    </div>
+    <div class="lb-tabs">
+      <button class="lb-tab active" data-tab="rank">🏆 排行榜</button>
+      <button class="lb-tab" data-tab="season">📅 本赛季</button>
+      <button class="lb-tab" data-tab="hall">👑 名人堂</button>
+      <button class="lb-tab" data-tab="wall">🎖️ 成就墙</button>
+      <button class="lb-tab" data-tab="my">👤 我的</button>
+    </div>
+    <!-- v17 榜单维度选择（仅排行榜 tab 可见） -->
+    <select id="lbBoard" class="rt-sel" style="margin:0 0 8px" hidden>
+      <option value="winRate">🏆 胜率榜</option>
+      <option value="kills">⚔️ 击杀榜</option>
+      <option value="streak">🔥 连胜榜</option>
+      <option value="sign">📅 签到榜</option>
+    </select>
+    <div id="lbList" class="lb-list"></div>
+    <div id="lbSeason" class="lb-list" hidden></div>
+    <div id="lbHall" class="lb-list" hidden></div>
+    <div id="lbWall" class="lb-wall" hidden></div>
+    <div id="lbMine" class="lb-mine"></div>
+    <button id="btnLbClose" class="ghost" style="width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- 规则弹窗 -->
+<div id="modal-rules" class="modal">
+  <div class="modal-box">
+    <h3><svg><use href="#i-book"/></svg> 玩法规则</h3>
+    <div class="rule-modal-list">
+      <div class="rule-item"><span class="r-ico">🎲</span><div><b>掷 6 起飞</b>：掷出 6 才能起飞一架，并可再掷一次；连续三个 6 本回合作废。</div></div>
+      <div class="rule-item"><span class="r-ico">✈️</span><div><b>叠子与撞子</b>：己方可重叠；落在敌机所在普通格把它撞回基地，并获额外掷骰。</div></div>
+      <div class="rule-item"><span class="r-ico">⭐</span><div><b>安全格</b>：四个起飞点（★）不会被撞。</div></div>
+      <div class="rule-item"><span class="r-ico">🛫</span><div><b>飞行箭头</b>：停在己色 ✈ 格可飞跃 12 格。</div></div>
+      <div class="rule-item"><span class="r-ico">🛡️</span><div><b>护盾</b>：自动挂到最前方飞机，被撞时抵消并反震对方回基地。</div></div>
+      <div class="rule-item"><span class="r-ico">🔄</span><div><b>重掷卡</b>：选机阶段可重掷一次，每回合限一次。</div></div>
+      <div class="rule-item"><span class="r-ico">🏠</span><div><b>到家</b>：绕行一周进入归航道，终点需精确点数到达。</div></div>
+      <div class="rule-item"><span class="r-ico">🏆</span><div><b>获胜</b>：最先 4 机全部到家者获胜，对局立即结束。</div></div>
+      <div class="rule-item"><span class="r-ico">🎲🎲</span><div><b>多骰模式</b>：建房可选双骰 / 三骰，一次掷出多颗后<b>逐颗使用</b>（可分给不同飞机）。该模式下 6 点不再奖励再掷，只有<b>击落敌机</b>才奖励再掷一组。</div></div>
+    </div>
+    <button id="btnRulesClose" class="ghost" style="width:100%;margin-top:16px">知道了</button>
+  </div>
+</div>
+
+<!-- 天梯匹配遮罩（#17） -->
+<div id="matchOverlay" class="match-overlay">
+  <div class="match-box">
+    <div class="match-spinner"></div>
+    <div class="match-title">天梯匹配中…</div>
+    <div class="match-sub" id="matchSub">正在为你寻找势均力敌的对手</div>
+    <div class="match-meta" id="matchMeta">段位：青铜 · 匹配人数：1</div>
+    <button id="btnMatchCancel" class="ghost">取消匹配</button>
+  </div>
+</div>
+
+<!-- 皮肤商店弹窗（#27 签到+皮肤商店） -->
+<div id="modal-shop" class="modal">
+  <div class="modal-box">
+    <h3><svg><use href="#i-shield"/></svg> 皮肤商店 <span class="shop-coins">🪙 <b id="shopCoins">0</b></span></h3>
+    <p class="tip">每日签到领金币，或用对局奖励解锁专属棋盘配色。</p>
+    <div id="shopList" class="shop-list"></div>
+    <div class="shop-sec-t">🎒 道具卡（开局自动携带，对局中可用）</div>
+    <div id="shopProps" class="shop-list"></div>
+    <button id="btnShopClose" class="ghost" style="width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- v9 好友弹窗 -->
+<div id="modal-friends" class="modal">
+  <div class="modal-box">
+    <h3><svg><use href="#i-friends"/></svg> 好友 <span class="mf-my">我：<b id="mfMy">?</b></span></h3>
+    <div class="mf-add">
+      <input id="mfInput" type="text" maxlength="8" placeholder="输入好友昵称添加" />
+      <button id="mfAddBtn" class="primary sm">添加</button>
+    </div>
+    <div id="mfList" class="mf-list"></div>
+    <p class="tip">好友按你输入的昵称记忆。点「邀战」会建房并把房间号发给对方，对方在线即可收到实时邀请。</p>
+    <button id="btnFriendsClose" class="ghost" style="width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- v9 设置弹窗 -->
+<div id="modal-settings" class="modal">
+  <div class="modal-box">
+    <h3><svg><use href="#i-gear"/></svg> 设置</h3>
+    <label class="st-row"><span>🔊 音效</span><button type="button" class="switch on" id="stSfx"></button></label>
+    <label class="st-row"><span>🎵 背景音乐</span><button type="button" class="switch on" id="stBgm"></button></label>
+    <label class="st-row"><span>📳 震动反馈</span><button type="button" class="switch on" id="stVib"></button></label>
+    <label class="st-row"><span>⚡ 动画速度</span>
+      <select id="stAnim" class="rt-sel">
+        <option value="700">慢 · 看清每一步</option>
+        <option value="380" selected>中 · 默认</option>
+        <option value="200">快 · 干脆利落</option>
+      </select>
+    </label>
+    <label class="st-row"><span>🎨 棋盘主题</span>
+      <select id="stTheme" class="rt-sel">
+        <option value="classic">经典极光</option>
+        <option value="aurora">极光紫</option>
+        <option value="sunset">落日橙</option>
+        <option value="forest">森野绿</option>
+        <option value="midnight">暗夜蓝</option>
+      </select>
+    </label>
+    <label class="st-row"><span>🌐 语言 / Language</span>
+      <select id="stLang" class="rt-sel">
+        <option value="zh">简体中文</option>
+        <option value="en">English</option>
+      </select>
+    </label>
+    <label class="st-row" style="display:block"><span id="stSecretLabel">🔑 账号凭证</span>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <code id="stSecret" style="flex:1;user-select:all;word-break:break-all;opacity:.75;font-size:12px"></code>
+        <button type="button" id="btnCopySecret" class="ghost" style="padding:4px 10px">复制</button>
+      </div>
+    </label>
+    <p class="tip">版本 v44。设置自动保存在本机，下次打开依然生效。凭证是你金币与道具的身份钥匙：换浏览器/设备时，把它粘贴到新设备的本机存储（fly_state_v1 的 secret 字段）即可继续使用原账号。</p>
+    <button id="btnSettingsClose" class="ghost" style="width:100%">完成</button>
+  </div>
+</div>
+
+<!-- v9 好友邀请卡 -->
+<div id="modal-invite" class="modal invite">
+  <div class="modal-box small">
+    <div class="iv-emoji">✈️</div>
+    <h3 id="ivTitle">好友邀你进房</h3>
+    <p class="iv-sub" id="ivSub">房间号：------</p>
+    <div class="iv-btns">
+      <button id="ivJoin" class="primary">加入房间</button>
+      <button id="ivIgnore" class="ghost">忽略</button>
+    </div>
+  </div>
+</div>
+
+<!-- v9 断线重连遮罩 -->
+<div id="reconnectMask" class="reconnect-mask" hidden>
+  <div class="rm-box">
+    <div class="rm-spin"></div>
+    <div class="rm-title">连接断开，正在重连…</div>
+    <div class="rm-sub" id="rmSub">剩 10 秒</div>
+    <p class="rm-tip">网络恢复后将自动回到对局。若长时间未连上，座位会被托管给 AI，重连后可收回控制权。</p>
+  </div>
+</div>
+
+<!-- v12 新手引导 -->
+<div id="guide" class="modal guide" hidden>
+  <div class="modal-box">
+    <h3>👋 欢迎来到飞行棋</h3>
+    <div id="guideBody" class="guide-body"></div>
+    <div class="guide-nav">
+      <button id="guideSkip" class="ghost">跳过</button>
+      <button id="guideNext" class="primary">下一步</button>
+    </div>
+  </div>
+</div>
+
+<!-- v12 每日任务弹窗 -->
+<div id="modal-daily" class="modal">
+  <div class="modal-box">
+    <h3>📅 每日任务</h3>
+    <p class="tip" id="dailyDate"></p>
+    <div id="dailyList" class="daily-list"></div>
+    <button id="btnDailyClaim" class="primary" style="width:100%">领取奖励</button>
+    <button id="btnDailyClose" class="ghost" style="width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- v12 公会弹窗 -->
+<div id="modal-guild" class="modal">
+  <div class="modal-box">
+    <h3><svg><use href="#i-friends"/></svg> 公会</h3>
+    <div id="guildMine" class="guild-mine"></div>
+    <div class="mf-add">
+      <input id="guildInput" type="text" maxlength="12" placeholder="公会名（创建）或公会ID（加入）" />
+      <button id="guildCreateBtn" class="primary sm">创建</button>
+      <button id="guildJoinBtn" class="ghost sm">加入</button>
+    </div>
+    <div class="shop-sec-t">🏆 公会战力榜</div>
+    <div id="guildRank" class="guild-rank"><div class="rh-empty">加载中…</div></div>
+    <div class="shop-sec-t">⚔️ 公会战 · 本周榜单</div>
+    <div id="guildWar" class="guild-rank"><div class="rh-empty">加载中…</div></div>
+    <p class="tip">公会分数 = 全体成员胜场累计（终身榜）；公会战为本周积分，每周一 0 点清零重新开打。创建后把公会 ID 发给队友，他们填 ID 点「加入」即可。</p>
+    <button id="btnGuildClose" class="ghost" style="width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- v12 PVE 闯关弹窗 -->
+<div id="modal-pve" class="modal">
+  <div class="modal-box">
+    <h3>🎯 闯关模式</h3>
+    <p class="tip" id="pveTip">从第 1 关打到第 10 关，AI 越来越强，还会带初始劣势。通关有金币奖励。</p>
+    <div id="pveList" class="pve-list"></div>
+    <button id="btnPveClose" class="ghost" style="width:100%">关闭</button>
+  </div>
+</div>
+
+<!-- v12 每日残局弹窗 -->
+<div id="modal-puzzle" class="modal">
+  <div class="modal-box">
+    <h3>🧩 每日残局</h3>
+    <p class="tip" id="puzzleTip">加载中…</p>
+    <div class="pz-wrap">
+      <canvas id="puzzleBoard" width="360" height="360"></canvas>
+    </div>
+    <div class="pz-bar">
+      <div class="pz-dice" id="pzDice"></div>
+      <div class="pz-meta"><span id="pzStep">步数 0/0</span><span id="pzHome">到家 0/4</span></div>
+    </div>
+    <div class="pz-acts">
+      <button id="btnPzRoll" class="primary sm">走这一步</button>
+      <button id="btnPzReset" class="ghost sm">重来</button>
+      <button id="btnPuzzleClose" class="ghost sm">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== v13 福利中心（订阅 / 周任务 / 战绩海报） ==================== -->
+<div id="modal-bonus" class="modal">
+  <div class="modal-box">
+    <h3>🎁 福利中心</h3>
+
+    <div class="shop-sec-t">💎 订阅特权</div>
+    <div id="subBox" class="sub-box">
+      <div class="tip">加载中…</div>
+    </div>
+
+    <div class="shop-sec-t">📅 本周任务</div>
+    <div id="weeklyList" class="wk-list"><div class="tip">加载中…</div></div>
+    <div class="bonus-acts">
+      <button id="btnWeeklyClaim" class="primary sm">领取周任务奖励</button>
+      <button id="btnAdCoin" class="ghost sm">📺 看广告得 10 金币</button>
+      <button id="btnAdDiamond" class="ghost sm">📺 看广告得 5 钻石</button>
+    </div>
+
+    <div class="shop-sec-t">🖼 战绩分享海报</div>
+    <div class="bonus-acts">
+      <button id="btnPoster" class="primary sm">生成我的战绩海报</button>
+    </div>
+    <div id="posterBox" class="poster-box" hidden>
+      <canvas id="posterCanvas" width="360" height="520"></canvas>
+      <p class="tip">长按图片可保存；扫码即可进房对战。</p>
+    </div>
+
+    <button id="btnBonusClose" class="ghost" style="width:100%;margin-top:14px">关闭</button>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="/js/board.js"></script>
+<script src="/js/fx.js"></script>
+<script src="/js/qr.js"></script>
+<script src="/js/i18n.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js').catch(function () { /* 忽略：PWA 非核心 */ });
+    });
+  }
+</script>
+</body>
+</html>

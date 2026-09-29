@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "房间",
+  "usingComponents": {
+    "seat-slot": "/components/seat-slot/seat-slot"
+  }
+}

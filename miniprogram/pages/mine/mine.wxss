@@ -1,0 +1,163 @@
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 44rpx 32rpx;
+}
+
+.avatar-btn {
+  background: transparent;
+  padding: 0;
+  line-height: 1;
+  border: none;
+  position: relative;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.avatar-edit {
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  color: var(--brand);
+  background: rgba(232, 84, 63, 0.08);
+  border-radius: 999rpx;
+  padding: 6rpx 22rpx;
+}
+
+.nick-wrap {
+  width: 100%;
+  margin-top: 32rpx;
+}
+
+.nick-input {
+  background: #f7f5ee;
+  border-radius: 16rpx;
+  height: 88rpx;
+  padding: 0 24rpx;
+  margin-top: 12rpx;
+  font-size: 30rpx;
+}
+
+.stats-title {
+  margin-bottom: 20rpx;
+}
+
+.stat-strip {
+  display: flex;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: 800;
+}
+
+.recent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18rpx 0;
+  border-bottom: 2rpx solid var(--line);
+}
+
+.recent-row:last-child {
+  border-bottom: none;
+}
+
+.recent-medal {
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.recent-meta {
+  text-align: right;
+  font-size: 26rpx;
+  flex: 1;
+}
+
+.recent-go {
+  font-size: 22rpx;
+  color: var(--brand);
+  flex-shrink: 0;
+}
+
+.rule-item {
+  font-size: 24rpx;
+  color: var(--ink-2);
+  line-height: 1.9;
+  margin-bottom: 6rpx;
+}
+
+.guide-replay {
+  font-size: 22rpx;
+  color: var(--brand);
+}
+
+.tier-tag {
+  font-size: 22rpx;
+  color: var(--gold);
+  background: rgba(255, 176, 58, 0.1);
+  border-radius: 999rpx;
+  padding: 8rpx 20rpx;
+}
+
+.back-btn {
+  margin-top: 32rpx;
+}
+
+/* 成就墙 */
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18rpx;
+}
+
+.ach {
+  background: #f7f5ee;
+  border-radius: 18rpx;
+  padding: 18rpx 8rpx;
+  text-align: center;
+  opacity: 0.45;
+}
+
+.ach.on {
+  background: #fff;
+  box-shadow: 0 4rpx 14rpx rgba(232, 84, 63, 0.16);
+  opacity: 1;
+}
+
+.ach-icon {
+  font-size: 40rpx;
+  line-height: 1.2;
+}
+
+.ach-name {
+  font-size: 22rpx;
+  font-weight: 600;
+  margin-top: 8rpx;
+  color: var(--ink);
+}
+
+.ach.on .ach-name {
+  color: var(--brand);
+}
+
+.ach-desc {
+  font-size: 18rpx;
+  color: var(--ink-3);
+  margin-top: 4rpx;
+  line-height: 1.4;
+}
+
+.version {
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 22rpx;
+  margin-top: 20rpx;
+}

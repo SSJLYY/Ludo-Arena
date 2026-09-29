@@ -1,0 +1,4 @@
+<view class="board" style="width:{{size}}px;height:{{size}}px;">
+  <canvas type="2d" id="bg" class="canvas" style="width:{{size}}px;height:{{size}}px;"></canvas>
+  <canvas type="2d" id="fx" class="canvas canvas-fx" style="width:{{size}}px;height:{{size}}px;" bindtap="onTap"></canvas>
+</view>

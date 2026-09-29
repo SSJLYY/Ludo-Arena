@@ -1,0 +1,61 @@
+<view class="page" wx:if="{{game}}">
+  <view class="result-head">
+    <view class="result-title">{{myRank ? posterTitle : '对局结束'}}</view>
+    <view class="sub">总掷骰 {{game.diceHistory.length}} 次{{durationText ? ' · 用时 ' + durationText : ''}}</view>
+    <view class="new-ach" wx:if="{{newAchievements.length}}">
+      🎉 解锁新成就
+      <text class="new-ach-item" wx:for="{{newAchievements}}" wx:key="id">{{item.icon}} {{item.name}}</text>
+    </view>
+  </view>
+
+  <!-- 冠军彩带 -->
+  <canvas type="2d" id="confetti" class="confetti-canvas" wx:if="{{showConfetti}}"></canvas>
+
+  <!-- 排名列表 -->
+  <view class="card">
+    <view class="rank-row" wx:for="{{rows}}" wx:key="rank">
+      <view class="medal">{{item.medal}}</view>
+      <player-avatar url="{{item.avatar}}" name="{{item.name}}" color="{{item.color}}" size="76" />
+      <view class="rank-info">
+        <view class="rank-name">
+          <text>{{item.name}}</text>
+          <text wx:if="{{item.isAI}}" class="ai-tag">AI</text>
+        </view>
+        <view class="sub">{{item.progress}} · 击落 {{item.kills}} · 掷骰 {{item.rolls}}</view>
+      </view>
+      <view class="rank-color" style="background:{{item.color}}"></view>
+    </view>
+  </view>
+
+  <!-- 我的统计 -->
+  <view class="stat-strip card" wx:if="{{myRank}}">
+    <view class="stat"><view class="stat-num">{{rows[myRank - 1].finished}}</view><view class="sub">到达</view></view>
+    <view class="stat"><view class="stat-num">{{rows[myRank - 1].kills}}</view><view class="sub">击落</view></view>
+    <view class="stat"><view class="stat-num">{{rows[myRank - 1].sixes}}</view><view class="sub">掷6</view></view>
+    <view class="stat"><view class="stat-num">{{rows[myRank - 1].rolls}}</view><view class="sub">掷骰</view></view>
+  </view>
+
+  <!-- 操作 -->
+  <view class="result-ops">
+    <button wx:if="{{isOwner && roomStatus !== 'playing'}}" class="btn btn-primary" bindtap="onAgain">🔁 再来一局</button>
+    <button wx:if="{{roomId}}" class="btn btn-ghost" bindtap="onBackRoom">回到房间</button>
+    <button class="btn btn-ghost" bindtap="onReplay">▶ 观看回放</button>
+    <button class="btn btn-ghost" bindtap="openPoster" disabled="{{!posterReady}}">🖼 生成战绩海报</button>
+    <button class="btn btn-ghost" open-type="share">📤 分享给好友</button>
+    <button class="btn btn-plain" bindtap="onHome">回大厅</button>
+  </view>
+
+  <!-- 海报弹层 -->
+  <view class="mask poster-mask" wx:if="{{showPoster}}" bindtap="closePoster">
+    <view class="poster-body" catchtap="">
+      <image class="poster-img" src="{{posterPath}}" mode="widthFix" wx:if="{{posterPath}}" />
+      <view class="poster-ops">
+        <button class="btn btn-primary save-btn" bindtap="savePoster">保存到相册</button>
+        <button class="btn btn-ghost save-btn" open-type="share">转发</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 离屏海报画布 -->
+  <canvas type="2d" id="poster" class="poster-canvas"></canvas>
+</view>

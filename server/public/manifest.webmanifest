@@ -1,0 +1,17 @@
+{
+  "name": "飞行棋 · 在线对战",
+  "short_name": "飞行棋",
+  "description": "在线多人飞行棋：道具卡、闯关、残局、公会战、好友对战，支持 PWA 安装到主屏。",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#e6ebfa",
+  "theme_color": "#6a5cff",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

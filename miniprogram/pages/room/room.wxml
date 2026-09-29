@@ -1,0 +1,68 @@
+<view class="page" wx:if="{{room}}">
+  <!-- 房间头 -->
+  <view class="room-head card">
+    <view class="spread">
+      <view>
+        <view class="sub">房间号</view>
+        <view class="room-no" aria-label="复制房间号" bindtap="copyRoomNo">{{room.roomNo}} <text class="copy">复制</text></view>
+      </view>
+      <view class="room-badges">
+        <view class="badge" wx:if="{{room.hasPassword}}">🔒 有密码</view>
+        <view class="badge">{{filledCount}}/4 人</view>
+        <view class="badge" wx:if="{{specList.length}}">👁 {{specList.length}} 人观战</view>
+      </view>
+    </view>
+    <view class="spectator-tip" wx:if="{{isSpectator}}">你正在观战，开局后将同步进入对局</view>
+    <view class="spec-list" wx:if="{{spectatorCount}}">
+      <view class="spec-item" wx:for="{{specList}}" wx:key="openId">
+        <player-avatar url="{{item.avatarUrl}}" name="{{item.nickName}}" color="#6b6d85" size="56" />
+      </view>
+      <view class="spec-label">等 {{spectatorCount}} 人观战中</view>
+    </view>
+    <view class="invite-row">
+      <button class="btn btn-primary invite-btn" open-type="share">📢 邀请好友进房</button>
+      <button class="btn btn-ghost poster-btn" bindtap="onInvitePoster">📸 邀请海报</button>
+    </view>
+  </view>
+
+  <!-- 邀请海报弹层 -->
+  <view class="mask poster-mask" wx:if="{{showPoster}}" bindtap="closePoster">
+    <view class="poster-body" catchtap="noop">
+      <image class="poster-img" src="{{posterPath}}" mode="widthFix" wx:if="{{posterPath}}" />
+      <view class="poster-ops">
+        <button class="btn btn-primary save-btn" bindtap="savePoster">保存到相册</button>
+        <button class="btn btn-ghost save-btn" open-type="share">转发给好友</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 离屏海报画布 -->
+  <canvas type="2d" id="invitePoster" class="invite-canvas"></canvas>
+
+  <!-- 座位 -->
+  <view class="seat-grid">
+    <seat-slot wx:for="{{room.seats}}" wx:key="index" seat="{{item}}"
+      is-owner="{{isOwner}}" my-open-id="{{myOpenId}}"
+      bind:sit="onSit" bind:addai="onAddAI" bind:removeai="onRemoveAI"
+      bind:setlevel="onSetLevel" bind:kick="onKick" />
+  </view>
+
+  <view class="rule-tip">
+    <view class="h2">房间规则</view>
+    <view class="rule-line">· 终点规则：{{room.settings.needExactFinish ? '精确到达（超出不能动）' : '超出点数弹回'}}</view>
+    <view class="rule-line">· 同色跳格：{{room.settings.allowJump ? '开启（+4 格）' : '关闭'}}</view>
+    <view class="rule-line">· 飞行箭头：{{room.settings.allowFly !== false ? '开启（同色箭头格飞跃 12 格）' : '关闭'}}</view>
+    <view class="rule-line">· 道具卡：{{room.settings.allowItems !== false ? '开启（击落得卡：🛡护盾 / 🔄重掷）' : '关闭'}}</view>
+    <view class="rule-line">· 行动顺序：红 → 黄 → 蓝 → 绿</view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar">
+    <button class="btn btn-ghost leave-btn" bindtap="onLeave" disabled="{{leaving}}">离开</button>
+    <view class="start-wrap">
+      <button class="btn btn-primary" bindtap="onStart" disabled="{{!canStart}}">
+        {{canStart ? '开始游戏' : startHint}}
+      </button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/hall/hall",
+    "pages/room/room",
+    "pages/game/game",
+    "pages/result/result",
+    "pages/replay/replay",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#f6f3ea",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "飞行棋",
+    "backgroundColor": "#f6f3ea",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

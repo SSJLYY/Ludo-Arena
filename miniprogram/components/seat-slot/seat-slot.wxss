@@ -1,0 +1,168 @@
+.slot {
+  position: relative;
+  background: #fff;
+  border: 3rpx solid #ece8dc;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  min-height: 176rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+}
+
+.empty-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 128rpx;
+}
+
+.plus {
+  font-size: 44rpx;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 12rpx;
+}
+
+.empty-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.mini-btn {
+  font-size: 22rpx;
+  line-height: 2.2;
+  border-radius: 999rpx;
+  background: #f7f5ee;
+  color: #23243a;
+  padding: 0 20rpx;
+}
+
+.mini-btn.alt {
+  background: #23243a;
+  color: #fff;
+}
+
+.mini-btn::after {
+  border: none;
+}
+
+.avatar-wrap {
+  position: relative;
+  margin-right: 20rpx;
+}
+
+.avatar {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  display: block;
+}
+
+.avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+
+.avatar-robot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+}
+
+.online {
+  position: absolute;
+  right: 2rpx;
+  bottom: 2rpx;
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+}
+
+.online.on { background: #27ae60; }
+.online.off { background: #b3b0a6; }
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 30rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.ellipsis {
+  max-width: 200rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.me-tag {
+  font-size: 18rpx;
+  color: #fff;
+  background: #e8543f;
+  border-radius: 8rpx;
+  padding: 2rpx 8rpx;
+  flex-shrink: 0;
+}
+
+.status {
+  font-size: 22rpx;
+  color: #b3543f;
+  margin-top: 8rpx;
+}
+
+.status.ok {
+  color: #27ae60;
+}
+
+.stars {
+  font-size: 22rpx;
+  color: #f0a12a;
+  margin-top: 8rpx;
+}
+
+.ops {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  display: flex;
+  gap: 12rpx;
+}
+
+.op {
+  font-size: 22rpx;
+  color: #6b6d85;
+  background: #f7f5ee;
+  border-radius: 999rpx;
+  padding: 6rpx 18rpx;
+}
+
+.op.danger {
+  color: #d43d2a;
+}
+
+.corner {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 8rpx;
+  opacity: 0.6;
+}
